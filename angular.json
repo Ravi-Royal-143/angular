@@ -120,9 +120,16 @@
               "devServerTarget": "first-app:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
   },
-  "defaultProject": "first-app"
+  "defaultProject": "first-app",
+  "cli": {
+    "analytics": "6e8359e6-d8dc-45ee-bcd4-748f56b41166"
+  }
 }

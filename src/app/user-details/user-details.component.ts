@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-details',
@@ -7,9 +8,19 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor() { }
+  profileForm = this.fb.group({
+    name: ['', Validators.required],
+    crush: ['', Validators.required],
+    description: ['']
+  });
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    console.log(this.profileForm.value)
   }
 
 }

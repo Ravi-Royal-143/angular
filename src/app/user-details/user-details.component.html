@@ -1,24 +1,30 @@
-<h5>Addons</h5>
-<div class="p-grid p-fluid">
-    <div class="p-col-12 p-md-4">
-        <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-            <input type="text" pInputText placeholder="Username">
+<div class="p-col">
+    <div class="p-grid p-fluid p-jc-center" [formGroup]="profileForm">
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <input type="text" pInputText placeholder="Username" formControlName="name">
+            </div>
         </div>
-    </div>
 
-    <div class="p-col-12 p-md-4">
-        <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">$</span>
-            <input type="text" pInputText placeholder="Price">
-            <span class="p-inputgroup-addon">.00</span>
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <input type="text" pInputText placeholder="Crush Name" formControlName="crush">
+            </div>
         </div>
-    </div>
 
-    <div class="p-col-12 p-md-4">
-        <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">www</span>
-            <input type="text" pInputText placeholder="Website">
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">$</span>
+                <input type="text" pInputText placeholder="description" formControlName="description">
+                <span class="p-inputgroup-addon">.00</span>
+            </div>
         </div>
+
+        <div class="p-col-2 p-md-2">
+            <p-button label="Submit" [disabled]="profileForm.invalid" (onClick)="onSubmit()"></p-button>
+        </div>
+
     </div>
 </div>

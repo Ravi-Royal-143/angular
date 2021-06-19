@@ -1,1 +1,3 @@
-export const myurlnodeUrl = 'http://localhost:3000';
+import { environment } from "src/environments/environment";
+
+export const myurlnodeUrl = environment.url;

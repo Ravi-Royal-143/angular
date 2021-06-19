@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href https://ravi-royal-143.github.io/angular/",
-    "buildprod": "ng build --prod",
+    "build": "ng build --prod=true --base-href https://ravi-royal-143.github.io/angular/",
+    "buildprod": "ng build --prod=true",
     "test": "ng test",
     "lint": "ng lint --fix",
     "e2e": "ng e2e",

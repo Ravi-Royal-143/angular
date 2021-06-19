@@ -7,7 +7,7 @@
     "build": "ng build --prod --base-href https://ravi-royal-143.github.io/angular/",
     "buildprod": "ng build --prod",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "ng lint --fix",
     "e2e": "ng e2e",
     "deploy": "ng deploy --base-href https://ravi-royal-143.github.io/angular/",
     "deploy:build": "ngh --dir dist/first-app",

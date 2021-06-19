@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserDetailsModule } from './user-details/user-details.module';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingModule } from 'src/shared/loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     UserDetailsModule,
-    HttpClientModule
+    HttpClientModule,
+    LoadingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

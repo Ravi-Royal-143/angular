@@ -5,8 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserDetailsModule } from './modules/user-details/user-details.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingModule } from 'src/app/shared/loading/loading.module';
+import { LoaderInterceptor } from './heplers/interceptors';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { LoadingModule } from 'src/app/shared/loading/loading.module';
     HttpClientModule,
     LoadingModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

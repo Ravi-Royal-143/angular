@@ -40,7 +40,7 @@ export class UserDetailsComponent implements OnInit {
   deleteuser(id) {
     this.userDetailsService.deleteUserDetails(id).subscribe(res => {
       this.users = res;
-    })
+    });
   }
 
 }

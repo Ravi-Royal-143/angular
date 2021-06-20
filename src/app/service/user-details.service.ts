@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Authorization': 'authkey',
-    'userid': '1'
+    Authorization: 'authkey',
+    userid: '1'
   })
 };
 

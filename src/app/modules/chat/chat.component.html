@@ -1,0 +1,33 @@
+<p>chat works!</p>
+<div class="p-p-4">
+
+    <p-card header="Chat Started">
+
+        <div *ngFor="let chat of chats">
+            <div *ngIf="chat.type == 'recieved'; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <div class="chat-border p-p-2 p-mr-6 p-mt-2">
+                    {{chat.message}} - if
+                </div>
+            </ng-template>
+            <ng-template #elseBlock>
+                <div class="chat-border p-p-2 p-ml-6 p-mt-2 p-text-right">
+                    {{chat.message}} - else
+                </div>
+            </ng-template>
+
+        </div>
+        <div class="p-mt-2 p-grid p-fluid">
+            <div class="p-col-11 p-pr-0">
+                <input #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
+            </div>
+            <div class="p-col-1 p-pl-0">
+                <p-button label="Submit" [disabled]="!chatref.value" (onClick)="onSend()">
+                </p-button>
+            </div>
+        </div>
+
+
+    </p-card>
+
+</div>

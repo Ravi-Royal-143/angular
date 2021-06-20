@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auto-unsubscribe',
-  templateUrl: ''
+  template: ''
 })
 export class AutoUnsubscribeComponent implements OnDestroy {
   protected subscription: Subscription[] = [];

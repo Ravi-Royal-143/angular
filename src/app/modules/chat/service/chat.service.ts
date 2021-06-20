@@ -13,7 +13,8 @@ export class ChatService {
   constructor() { }
 
   setupSocketConnection() {
-    this.socket = io(myurlnodeUrl);
+    var allowedOrigins = "domain_1:* domain_2:*";
+    this.socket = io(myurlnodeUrl, { transports: ['websocket', 'polling', 'flashsocket'] });
     this.socket.on('message-broadcast', (data: string) => {
       console.log(data);
       this.latestChat.next(data);

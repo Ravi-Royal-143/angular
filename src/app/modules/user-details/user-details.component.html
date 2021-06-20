@@ -22,7 +22,7 @@
 </div>
 
 <div *ngFor="let user of users">
-    <div (click)="deleteuser(user.id)">
+    <div (click)="deleteuser(user._id)">
         {{user.name}} <i class="pi pi-heart"></i> {{user.crush}}
     </div>
 </div>

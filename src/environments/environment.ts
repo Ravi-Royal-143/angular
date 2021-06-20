@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://node-a60mv3avr-ravi-royal-143.vercel.app'
+  url: 'http://localhost:3000'
 };
 
 /*

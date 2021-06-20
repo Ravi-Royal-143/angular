@@ -32,7 +32,7 @@ export class UserDetailsComponent implements OnInit {
       ...this.profileForm.value
     };
     this.userDetailsService.postUserDetails(payload).subscribe(res => {
-      this.users = res;
+      this.users.push(res);
     });
   }
 

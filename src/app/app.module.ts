@@ -8,10 +8,12 @@ import { UserDetailsModule } from './modules/user-details/user-details.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingModule } from 'src/app/shared/loading/loading.module';
 import { LoaderInterceptor } from './heplers/interceptors';
+import { EmptyRouteComponent } from './empty-route/empty-route/empty-route.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmptyRouteComponent
   ],
   imports: [
     BrowserModule,

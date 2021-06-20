@@ -5,6 +5,7 @@ import { UserDetailsComponent } from './user-details.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserDetailsRoutingModule } from './user-details-routing.module';
 
 @NgModule({
   declarations: [UserDetailsComponent],
@@ -13,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     InputTextModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UserDetailsRoutingModule
   ]
 })
 export class UserDetailsModule { }

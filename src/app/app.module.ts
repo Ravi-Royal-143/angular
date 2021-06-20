@@ -4,9 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserDetailsModule } from './user-details/user-details.module';
+import { UserDetailsModule } from './modules/user-details/user-details.module';
 import { HttpClientModule } from '@angular/common/http';
-import { LoadingModule } from 'src/shared/loading/loading.module';
+import { LoadingModule } from 'src/app/shared/loading/loading.module';
 
 @NgModule({
   declarations: [

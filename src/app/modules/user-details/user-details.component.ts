@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UserDetailsService } from '../service/user-details.service';
+import { UserDetailsService } from '../../service/user-details.service';
 
 @Component({
   selector: 'app-user-details',

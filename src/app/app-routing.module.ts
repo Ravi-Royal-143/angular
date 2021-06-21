@@ -17,6 +17,10 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'auth',
+    loadChildren: () => import('@modules/credential/credential.module').then(m => m.CredentialModule)
+  },
   { path: '**', component: EmptyRouteComponent }
 ];
 

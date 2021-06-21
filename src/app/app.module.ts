@@ -10,6 +10,7 @@ import { LoadingModule } from 'src/app/shared/loading/loading.module';
 import { LoaderInterceptor } from './heplers/interceptors';
 import { EmptyRouteComponent } from './empty-route/empty-route/empty-route.component';
 import { ButtonModule } from 'primeng/button';
+import { CredentialModule } from '@modules/credential/credential.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ButtonModule } from 'primeng/button';
     UserDetailsModule,
     HttpClientModule,
     LoadingModule,
-    ButtonModule
+    ButtonModule,
+    CredentialModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }

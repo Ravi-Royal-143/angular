@@ -10,15 +10,15 @@ import { LogInService } from './log-in/log-in.service';
 export class LogInComponent {
 
   userInfo: FormGroup = this.fb.group({
-    username: ['', Validators.required],
+    gmail: ['', Validators.required],
     password: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder, private logInService: LogInService) { }
 
   onSubmit() {
-    const { username, password } = this.userInfo.value;
-    this.logInService.authenticate({ username, password }).subscribe(res => {
+    const { gmail, password } = this.userInfo.value;
+    this.logInService.authenticate({ gmail, password }).subscribe(res => {
       console.log("sucees", res)
     });
   }

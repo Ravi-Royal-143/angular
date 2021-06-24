@@ -1,0 +1,10 @@
+$color: (
+    "red": #d64651,
+    "orange": #e55937,
+);
+
+@each $key, $value in $color {
+    .#{$prefix}-color-#{$key} {
+        color: $value;
+    }
+}

@@ -10,14 +10,19 @@ import { SignUpService } from './service/sign-up.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
 
+  isgmailValidate: boolean;
+  isUserNameValidate: boolean;
+  ispasswordValidate: boolean;
+  isrepasswordValidate: boolean;
   userSignUp: FormGroup = this.fb.group({
-    username: ['', Validators.required],
-    gmail: ['', Validators.required],
-    password: ['', Validators.required],
+    username: ['', [Validators.required, Validators.minLength(5)]],
+    gmail: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
     repassword: ['', Validators.required]
   });
+
   constructor(
     private fb: FormBuilder,
     private signUpService: SignUpService,
@@ -26,18 +31,72 @@ export class SignUpComponent implements OnInit {
     private toastMessageService: ToastMessageService
   ) { }
 
-  ngOnInit(): void {
+  get formDetails() {
+    return this.userSignUp.controls;
+  }
+
+  get userNameFormDetails() {
+    return this.formDetails.username;
+  }
+
+  get gmailFormDetails() {
+    return this.formDetails.gmail;
+  }
+
+  get passwordFormDetails() {
+    return this.formDetails.password;
+  }
+
+  get repasswordFormDetails() {
+    return this.formDetails.repassword;
   }
 
   onSubmit() {
+    this.checkOnSubmit();
     const { username, gmail, password, repassword } = this.userSignUp.value;
-    if (password !== repassword) {
-      this.toastMessageService.addToast(['Please Check Password again'])
+    let isFieldInvalid = false;
+    isFieldInvalid = this.userSignUp.invalid ? true : this.checkDataPresent()
+    isFieldInvalid = isFieldInvalid ? isFieldInvalid : this.isPasswordSame(password, repassword)
+    if (isFieldInvalid) {
       return;
     }
     this.signUpService.signUp({ gmail, password, username }).subscribe(res => {
       this.router.navigate(['../', 'log-in'], { relativeTo: this.route })
     });
+  }
+
+  onBlurFields(validateField) {
+    this[validateField] = true;
+  }
+
+  checkOnSubmit() {
+    this.isgmailValidate = true;
+    this.isUserNameValidate = true;
+    this.ispasswordValidate = true;
+    this.isrepasswordValidate = true;
+  }
+
+  checkDataPresent() {
+    let errMessage = [];
+    Object.keys(this.userSignUp.controls).forEach(fieldName => {
+      console.log(fieldName)
+      if (!this.formDetails[fieldName].value) {
+        errMessage.push(`Please Enter ${fieldName}`)
+      }
+    });
+    if (errMessage.length) {
+      this.toastMessageService.showErrorToast(errMessage);
+      return true;
+    }
+    return false;
+  }
+
+  isPasswordSame(password, repassword) {
+    if (password !== repassword) {
+      this.toastMessageService.showErrorToast(['Password must be same'])
+      return true;
+    }
+    return false;
   }
 
 }

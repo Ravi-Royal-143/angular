@@ -14,8 +14,8 @@ export class ErrorInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError(err => {
-        let error = err;
-        let statusCode = err.status;
+        const error = err;
+        const statusCode = err.status;
         // if([401, 403].indexOf(statusCode) !== -1) {
         // redirect
         // } else {

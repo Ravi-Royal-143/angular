@@ -55,13 +55,14 @@ export class SignUpComponent {
     this.checkOnSubmit();
     const { username, gmail, password, repassword } = this.userSignUp.value;
     let isFieldInvalid = false;
-    isFieldInvalid = this.userSignUp.invalid ? true : this.checkDataPresent()
-    isFieldInvalid = isFieldInvalid ? isFieldInvalid : this.isPasswordSame(password, repassword)
+    isFieldInvalid = this.userSignUp.invalid ? true : this.checkDataPresent();
+    isFieldInvalid = isFieldInvalid ? isFieldInvalid : this.isPasswordSame(password, repassword);
     if (isFieldInvalid) {
       return;
     }
     this.signUpService.signUp({ gmail, password, username }).subscribe(res => {
-      this.router.navigate(['../', 'log-in'], { relativeTo: this.route })
+      this.toastMessageService.showSuccessToast([res.message]);
+      this.router.navigate(['../', 'log-in'], { relativeTo: this.route });
     });
   }
 
@@ -77,11 +78,10 @@ export class SignUpComponent {
   }
 
   checkDataPresent() {
-    let errMessage = [];
+    const errMessage = [];
     Object.keys(this.userSignUp.controls).forEach(fieldName => {
-      console.log(fieldName)
       if (!this.formDetails[fieldName].value) {
-        errMessage.push(`Please Enter ${fieldName}`)
+        errMessage.push(`Please Enter ${fieldName}`);
       }
     });
     if (errMessage.length) {
@@ -93,7 +93,7 @@ export class SignUpComponent {
 
   isPasswordSame(password, repassword) {
     if (password !== repassword) {
-      this.toastMessageService.showErrorToast(['Password must be same'])
+      this.toastMessageService.showErrorToast(['Password must be same']);
       return true;
     }
     return false;

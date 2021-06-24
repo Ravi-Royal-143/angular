@@ -12,10 +12,10 @@ function getAPIUrls(endpointRoot: string, endPoints: { [key: string]: string }):
     const urls = {};
 
     Object.entries(endPoints).forEach(([endPointKey, endPointUrl]) => {
-        urls[endPointKey] = `${endpointRoot}/${endPointUrl}`
+        urls[endPointKey] = `${endpointRoot}/${endPointUrl}`;
     });
 
     return urls;
 }
 
-export const mynodeEndPoint = getAPIUrls(myurlnodeUrl, nodeEndPoints)
+export const mynodeEndPoint = getAPIUrls(myurlnodeUrl, nodeEndPoints);

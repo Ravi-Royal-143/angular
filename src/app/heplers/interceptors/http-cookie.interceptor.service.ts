@@ -10,11 +10,11 @@ export class HttpCookieInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.indexOf(environment.url) !== -1) {
-      let cookie = document.cookie;
-      console.log(cookie)
+      const cookie = document.cookie;
+      console.log(cookie);
       req = req.clone({
         headers: req.headers.set('Authorization', document.cookie)
-      })
+      });
     }
     return next.handle(req);
   }

@@ -8,6 +8,7 @@
     "buildprod": "ng build --prod=true",
     "test": "ng test",
     "lint": "ng lint --fix",
+    "lint:fix": "ng lint --fix",
     "e2e": "ng e2e",
     "deploy": "ng deploy --base-href https://ravi-royal-143.github.io/angular/",
     "deploy:build": "ngh --dir dist/first-app",

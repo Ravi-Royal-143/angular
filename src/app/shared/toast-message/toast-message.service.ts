@@ -9,8 +9,8 @@ export class ToastMessageService {
 
   constructor(private messageService: MessageService) { }
 
-  addToast(data): void {
-    this.messageService.add({ severity: data.severity, summary: data.summary, detail: data.detail });
+  addToast(data, key: string = defaultToast.key): void {
+    this.messageService.add({ key, severity: data.severity, summary: data.summary, detail: data.detail });
   }
 
   multiplyToast(toasts: Message[]) {

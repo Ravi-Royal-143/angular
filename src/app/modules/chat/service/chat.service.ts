@@ -15,7 +15,6 @@ export class ChatService {
   setupSocketConnection() {
     this.socket = io(websockerUrl, { transports: ['websocket', 'polling', 'flashsocket'] });
     this.socket.on('message-broadcast', (data: string) => {
-      console.log(data);
       this.latestChat.next(data);
     });
   }

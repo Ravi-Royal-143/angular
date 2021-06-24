@@ -17,7 +17,6 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
   }
 
   ngOnInit() {
-    console.log('com initated');
     this.chatService.setupSocketConnection();
     const sub$ = this.chatService.latestChat.subscribe((data: string) => {
       this.addToChat('recieved', data);

@@ -7,12 +7,12 @@
             <div *ngIf="chat.type == 'recieved'; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
                 <div class="chat-border p-p-2 p-mr-6 p-mt-2">
-                    {{chat.message}} - if
+                    YOU: {{chat.message}}
                 </div>
             </ng-template>
             <ng-template #elseBlock>
                 <div class="chat-border p-p-2 p-ml-6 p-mt-2 p-text-right">
-                    {{chat.message}} - else
+                    PARTNER: {{chat.message}} - else
                 </div>
             </ng-template>
 

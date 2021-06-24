@@ -11,6 +11,8 @@ import { LoaderInterceptor } from './heplers/interceptors';
 import { EmptyRouteComponent } from './empty-route/empty-route/empty-route.component';
 import { ButtonModule } from 'primeng/button';
 import { CredentialModule } from '@modules/credential/credential.module';
+import { HttpCookieInterceptorService } from './heplers/interceptors/http-cookie.interceptor.service';
+import { ErrorInterceptorService } from './heplers/interceptors/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { CredentialModule } from '@modules/credential/credential.module';
     CredentialModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpCookieInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

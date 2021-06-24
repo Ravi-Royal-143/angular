@@ -19,7 +19,7 @@ export class LogInComponent {
   onSubmit() {
     const { gmail, password } = this.userInfo.value;
     this.logInService.authenticate({ gmail, password }).subscribe(res => {
-      console.log("sucees", res)
+      document.cookie = 'cookie' + "=" + res.cookie
     });
   }
 

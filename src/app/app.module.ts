@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { CredentialModule } from '@modules/credential/credential.module';
 import { HttpCookieInterceptorService } from './heplers/interceptors/http-cookie.interceptor.service';
 import { ErrorInterceptorService } from './heplers/interceptors/error-interceptor.service';
+import { ToastMessageModule } from './shared/toast-message/toast-message.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ErrorInterceptorService } from './heplers/interceptors/error-intercepto
     HttpClientModule,
     LoadingModule,
     ButtonModule,
-    CredentialModule
+    CredentialModule,
+    ToastMessageModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },

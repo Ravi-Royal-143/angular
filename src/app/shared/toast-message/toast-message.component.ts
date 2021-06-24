@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { defaultToast } from './defaultToastValues';
 
 @Component({
   selector: 'app-toast-message',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toast-message.component.scss']
 })
 export class ToastMessageComponent implements OnInit {
+
+  @Input() key: string = defaultToast.key;
 
   constructor() { }
 

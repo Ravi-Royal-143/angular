@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+$sizes: 500, 700, 300;
+
+@each $size in $sizes {
+  .#{$prefix}-ft-wt-#{$size} {
+    font-weight: $size;
+  }
+}

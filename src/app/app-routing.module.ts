@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmptyRouteComponent } from './empty-route/empty-route/empty-route.component';
+import { IsauthenticatedService } from './heplers/isauthenticated/isauthenticated.service';
 
 const routes: Routes = [
   // { path: 'user-details', component: UserDetailsComponent },
@@ -9,6 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: 'chat',
+        canActivate: [IsauthenticatedService],
         loadChildren: () => import('@modules/chat/chat.module').then(m => m.ChatModule)
       },
       {

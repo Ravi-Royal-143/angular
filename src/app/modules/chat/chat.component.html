@@ -1,31 +1,46 @@
-<p>chat works!</p>
 <div class="p-p-4">
 
-    <p-card header="Chat Started">
+    <p-card header="Chat Started" styleClass="chatBody">
 
         <div *ngFor="let chat of chats">
             <div *ngIf="chat.type == 'recieved'; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
-                <div class="chat-border p-p-2 p-mr-6 p-mt-2">
-                    PARTNER: {{chat.message}}
+                <div class="p-col-12">
+                    <div class="p-fluid p-grid p-mr-5">
+                        <div class="p-col-1 chat-border p-text-center">
+                            PARTNER
+                        </div>
+                        <div class="p-col-11 chat-border  p-text-right p-pr-4">
+                            {{chat.message}}
+                        </div>
+                    </div>
                 </div>
             </ng-template>
             <ng-template #elseBlock>
-                <div class="chat-border p-p-2 p-ml-6 p-mt-2 p-text-right">
-                    YOU: {{chat.message}}
+                <div class="p-col-12">
+                    <div class="p-fluid p-grid  p-ml-5">
+                        <div class="p-col-11 chat-border  p-text-right">
+                            {{chat.message}}
+                        </div>
+                        <div class="p-col-1 chat-border p-text-center">
+                           YOU
+                        </div>
+                    </div>
                 </div>
             </ng-template>
 
         </div>
-        <div class="p-mt-2 p-grid p-fluid">
-            <div class="p-col-11 p-pr-0">
-                <input #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
+        <ng-template pTemplate="footer">
+            <div class="p-mt-2 p-grid p-fluid">
+                <div class="p-col-11 p-pr-0">
+                    <input #textRef #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
+                </div>
+                <div class="p-col-1 p-pl-0">
+                    <p-button icon="pi pi-send" [disabled]="!chatref.value" (onClick)="onSend()">
+                    </p-button>
+                </div>
             </div>
-            <div class="p-col-1 p-pl-0">
-                <p-button icon="pi pi-send" [disabled]="!chatref.value" (onClick)="onSend()">
-                </p-button>
-            </div>
-        </div>
+        </ng-template>
 
 
     </p-card>

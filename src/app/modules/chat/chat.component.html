@@ -22,7 +22,7 @@
                 <input #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
             </div>
             <div class="p-col-1 p-pl-0">
-                <p-button label="Submit" [disabled]="!chatref.value" (onClick)="onSend()">
+                <p-button icon="pi pi-send" [disabled]="!chatref.value" (onClick)="onSend()">
                 </p-button>
             </div>
         </div>

@@ -1,0 +1,41 @@
+<div class="centerOfScreen" [formGroup]="userData">
+    <div class="p-col-12 p-xl-5 p-p-5 p-md-7 p-xs-12">
+        <div class="p-fluid  p-jc-center chat-border p-p-6" [ngClass]="{res : result}">
+            <div *ngIf="!result">
+
+                <div class="p-col-12">
+                    <span class="royal-ft-wt-700"> FLAMES </span>
+                </div>
+                <div class="p-col-12">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="email" pInputText placeholder="Your Name" formControlName="yourName"
+                            (blur)="onBlurFields('iscrushNameValidate')">
+                    </div>
+                    <span class="royal-color-red" *ngIf="isyourNameValidate && !yourNameDetails.value">
+                        Enter Your Name</span>
+                </div>
+                <div class="p-col-12">
+                    <span class="pi pi-heart royal-color-red"></span>
+                </div>
+                <div class="p-col-12">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="text" pInputText placeholder="Crush Name" formControlName="crushName"
+                            (blur)="onBlurFields('iscrushNameValidate')">
+                    </div>
+                    <span class="royal-color-red" *ngIf="isyourNameValidate && !crushNameFormDetails.value">
+                        Enter Your Crush Name</span>
+                </div>
+                <div class="p-col-12">
+                    <p-button label="Calculate" (onClick)="onSubmit()"></p-button>
+                </div>
+            </div>
+            <div *ngIf="result">
+                {{result | uppercase}}
+            </div>
+        </div>
+        <p-button *ngIf="result" label="Check Next Crush"  icon="pi pi-refresh" iconPos="right" (onClick)="result = ''">
+        </p-button>
+    </div>
+</div>

@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FlamesComponent } from '@modules/flames/flames.component';
 import { UserDetailsComponent } from './user-details.component';
 
 const routes: Routes = [
     {
-        path: 'add-crush',
-        component: UserDetailsComponent
+        path: 'flames',
+        component: FlamesComponent
     },
     {
         path: '',
-        redirectTo: 'add-crush',
+        redirectTo: 'flames',
         pathMatch: 'full'
     }
 ];

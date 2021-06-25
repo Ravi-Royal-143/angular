@@ -15,6 +15,7 @@ import { HttpCookieInterceptorService } from './heplers/interceptors/http-cookie
 import { ErrorInterceptorService } from './heplers/interceptors/error-interceptor.service';
 import { ToastMessageModule } from './shared/toast-message/toast-message.module';
 import { NavBarModule } from '@modules/nav-bar/nav-bar.module';
+import { FlamesModule } from '@modules/flames/flames.module';
 
 @NgModule({
   declarations: [
@@ -25,13 +26,11 @@ import { NavBarModule } from '@modules/nav-bar/nav-bar.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    UserDetailsModule,
     HttpClientModule,
     LoadingModule,
-    ButtonModule,
-    CredentialModule,
     NavBarModule,
-    ToastMessageModule
+    ToastMessageModule,
+    FlamesModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },

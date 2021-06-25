@@ -14,6 +14,7 @@ import { CredentialModule } from '@modules/credential/credential.module';
 import { HttpCookieInterceptorService } from './heplers/interceptors/http-cookie.interceptor.service';
 import { ErrorInterceptorService } from './heplers/interceptors/error-interceptor.service';
 import { ToastMessageModule } from './shared/toast-message/toast-message.module';
+import { NavBarModule } from '@modules/nav-bar/nav-bar.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ToastMessageModule } from './shared/toast-message/toast-message.module'
     LoadingModule,
     ButtonModule,
     CredentialModule,
+    NavBarModule,
     ToastMessageModule
   ],
   providers: [

@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" [routerLink]="['user-details', 'add-crush']">Royal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <!-- <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['user-details', 'add-crush']">Home</a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['user-details', 'chat']">Chat</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['user-details', 'add-crush']">Fun</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="!isLoggedIn" [routerLink]="['auth', 'sign-up']"> Sign Up <span
+            class="pi pi-user"></span></a>
+      </li>
+      <li class="nav-item" *ngIf="!isLoggedIn">
+        <a class="nav-link" [routerLink]="['auth', 'log-in']"> Login <span class="pi pi-sign-in"></span></a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn" (click)="logOut()">
+        <a class="nav-link" href="#"> Log Out <span class="pi pi-sign-out"></span></a>
+      </li>
+    </ul>
+  </div>
+</nav>`

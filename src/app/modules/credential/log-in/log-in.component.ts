@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavBarService } from '@modules/nav-bar/service/nav-bar.service';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { LogInService } from './log-in/log-in.service';
 
@@ -20,7 +21,7 @@ export class LogInComponent {
   get formDetails() {
     return this.userInfo.controls;
   }
-  
+
   get gmailFormDetails() {
     return this.formDetails.gmail;
   }
@@ -34,7 +35,9 @@ export class LogInComponent {
     private fb: FormBuilder,
     private logInService: LogInService,
     private router: Router,
-    private toastMessageService: ToastMessageService
+    private toastMessageService: ToastMessageService,
+    private navBarService: NavBarService
+
   ) { }
 
   onSubmit() {
@@ -46,6 +49,7 @@ export class LogInComponent {
     }
     this.logInService.authenticate({ gmail, password }).subscribe(res => {
       document.cookie = 'cookie' + '=' + res.cookie;
+      this.navBarService.isLoggedIn.next(true);
       this.toastMessageService.showSuccessToast(['Sucessfully logged in.']);
       this.router.navigate(['/']);
     });

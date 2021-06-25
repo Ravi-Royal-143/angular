@@ -4,12 +4,12 @@ import { UserDetailsComponent } from './user-details.component';
 
 const routes: Routes = [
     {
-        path: 'add',
+        path: 'add-crush',
         component: UserDetailsComponent
     },
     {
         path: '',
-        redirectTo: 'add',
+        redirectTo: 'add-crush',
         pathMatch: 'full'
     }
 ];

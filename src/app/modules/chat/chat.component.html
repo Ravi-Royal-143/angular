@@ -7,10 +7,8 @@
             <ng-template #thenBlock>
                 <div class="p-col-12">
                     <div class="p-fluid p-grid p-mr-5">
-                        <div class="p-col-1 chat-border p-text-center">
-                            PARTNER
-                        </div>
-                        <div class="p-col-11 chat-border  p-text-right p-pr-4">
+                        <div class="p-col-12 chat-border">
+                            <span class="royal-ft-wt-700">PARTNER: </span>
                             {{chat.message}}
                         </div>
                     </div>
@@ -19,11 +17,9 @@
             <ng-template #elseBlock>
                 <div class="p-col-12">
                     <div class="p-fluid p-grid  p-ml-5">
-                        <div class="p-col-11 chat-border  p-text-right">
+                        <div class="p-col-12 chat-border  p-text-right">
+                            <span class="royal-ft-wt-700">YOU: </span>
                             {{chat.message}}
-                        </div>
-                        <div class="p-col-1 chat-border p-text-center">
-                           YOU
                         </div>
                     </div>
                 </div>
@@ -31,13 +27,18 @@
 
         </div>
         <ng-template pTemplate="footer">
-            <div class="p-mt-2 p-grid p-fluid">
-                <div class="p-col-11 p-pr-0">
-                    <input #textRef #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
+            <div class="p-grid">
+                <div class="p-col p-pr-0">
+                    <div class="box">
+                        <input class="w-100" #textRef #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
+                    </div>
                 </div>
-                <div class="p-col-1 p-pl-0">
-                    <p-button icon="pi pi-send" [disabled]="!chatref.value" (onClick)="onSend()">
-                    </p-button>
+                <div class="p-col-fixed p-pl-0" style="width:80px">
+                    <div class="box">
+                        <p-button icon="pi pi-send" styleClass="icon-button" [disabled]="!chatref.value"
+                            (onClick)="onSend()">
+                        </p-button>
+                    </div>
                 </div>
             </div>
         </ng-template>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CrushService } from './service/crush.service';
 
 @Component({
   selector: 'app-flames',
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FlamesComponent {
 
   result: string = '';
-  
+
   isyourNameValidate: boolean;
   iscrushNameValidate: boolean;
 
@@ -18,8 +19,8 @@ export class FlamesComponent {
     crushName: ['', Validators.required]
   });
   flames = ['Friends', 'Love', 'Affair', 'Marriage', 'Enemy', 'Sister'];
-  
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder, private crushService: CrushService) { }
 
   get formDetails() {
     return this.userData.controls;
@@ -36,33 +37,38 @@ export class FlamesComponent {
 
   onSubmit() {
     this.checkOnSubmit();
-    if(this.userData.invalid) {
+    if (this.userData.invalid) {
       return;
     }
-    let { yourName , crushName } = this.userData.value;
-    if(yourName == crushName ) {
+    let { yourName, crushName } = this.userData.value;
+    let checkYourName = yourName;
+    let checkCrushName = crushName;
+    if (checkYourName == checkCrushName) {
       this.result = 'Enemy';
       return;
     }
     var r = /\s+/g;
-    yourName = yourName.toLowerCase().replace(r, "").split('');
-    crushName = crushName.toLowerCase().replace(r, "").split('');
-    yourName.forEach((firstData, i) => {
-      crushName.forEach((secondData, j) => {
+    checkYourName = checkYourName.toLowerCase().replace(r, "").split('');
+    checkCrushName = checkCrushName.toLowerCase().replace(r, "").split('');
+    checkYourName.forEach((firstData, i) => {
+      checkCrushName.forEach((secondData, j) => {
         if (firstData === secondData && firstData != '') {
-          yourName[i] = '';
-          crushName[j] = '';
+          checkYourName[i] = '';
+          checkCrushName[j] = '';
         }
       })
     });
-    yourName = yourName.join('')
-    crushName = crushName.join('')
-    let lengthInput = yourName.length + crushName.length;
-    
-    this.result = this.flames[(lengthInput % 6) - 1];
+    checkYourName = checkYourName.join('')
+    checkCrushName = checkCrushName.join('')
+    let lengthInput = checkYourName.length + checkCrushName.length;
+    this.crushService.getCrush({ yourName, crushName }).subscribe(res => {
+      this.result = this.flames[(lengthInput % 6) - 1];
+    }, err => {
+      this.result = this.flames[(lengthInput % 6) - 1];
+    });
   }
 
-  
+
   onBlurFields(validateField) {
     this[validateField] = true;
   }

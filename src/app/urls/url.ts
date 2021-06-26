@@ -5,7 +5,8 @@ export const websockerUrl = environment.websockerUrl;
 
 const nodeEndPoints = {
     logIn: 'auth/log-in',
-    signUp: 'auth/sign-up'
+    signUp: 'auth/sign-up',
+    crush: 'crush'
 };
 
 function getAPIUrls(endpointRoot: string, endPoints: { [key: string]: string }): { [key: string]: string } {

@@ -18,7 +18,15 @@ export class FlamesComponent {
     yourName: ['', Validators.required],
     crushName: ['', Validators.required]
   });
-  flames = ['Friends', 'Love', 'Affair', 'Marriage', 'Enemy', 'Sister'];
+  flames = {
+    'f': 'Friends',
+    'l': 'Love',
+    'a': 'Affair',
+    'm': 'Marriage',
+    'e': 'Enemy',
+    's': 'Sister',
+  };
+  fla = ['f', 'l', 'a', 'm', 'e', 's'];
 
   constructor(private fb: FormBuilder, private crushService: CrushService) { }
 
@@ -61,10 +69,23 @@ export class FlamesComponent {
     checkYourName = checkYourName.join('')
     checkCrushName = checkCrushName.join('')
     let lengthInput = checkYourName.length + checkCrushName.length;
+    let fla = ['f', 'l', 'a', 'm', 'e', 's'];
+    lengthInput = lengthInput - 1;
+    let lastStandingLetter = [...fla];
+    while (lastStandingLetter.length > 1) {
+      let removalIndex = lengthInput % lastStandingLetter.length;
+      lastStandingLetter[removalIndex] = ' ';
+      lastStandingLetter = lastStandingLetter.join('').trim().split(' ');
+      if (lastStandingLetter.length > 1) {
+        lastStandingLetter = lastStandingLetter.reverse().join('').split('');
+      }
+      lastStandingLetter = lastStandingLetter.join('').split('');
+    }
+
     this.crushService.getCrush({ yourName, crushName }).subscribe(res => {
-      this.result = this.flames[(lengthInput % 6) - 1];
+      this.result = this.flames[lastStandingLetter.join('')];
     }, err => {
-      this.result = this.flames[(lengthInput % 6) - 1];
+      this.result = this.flames[lastStandingLetter.join('')];
     });
   }
 

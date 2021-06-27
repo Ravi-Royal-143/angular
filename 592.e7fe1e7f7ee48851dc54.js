@@ -1,1 +1,0 @@
-(self.webpackChunkfirst_app=self.webpackChunkfirst_app||[]).push([[592],{1036:(s,n,t)=>{"use strict";t.d(n,{OU:()=>r,QG:()=>u});var e=t(529);const r=e.N.websockerUrl,u=function(s,n){const t={};return Object.entries({logIn:"auth/log-in",signUp:"auth/sign-up"}).forEach(([n,e])=>{t[n]=`${s}/${e}`}),t}(e.N.url)}}]);

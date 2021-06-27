@@ -49,8 +49,8 @@ export class FlamesComponent {
       return;
     }
     let { yourName, crushName } = this.userData.value;
-    let checkYourName = yourName;
-    let checkCrushName = crushName;
+    let checkYourName = yourName.trim();
+    let checkCrushName = crushName.trim();
     if (checkYourName == checkCrushName) {
       this.result = 'Enemy';
       return;
@@ -58,9 +58,9 @@ export class FlamesComponent {
     var r = /\s+/g;
     checkYourName = checkYourName.toLowerCase().replace(r, "").split('');
     checkCrushName = checkCrushName.toLowerCase().replace(r, "").split('');
-    checkYourName.forEach((firstData, i) => {
-      checkCrushName.forEach((secondData, j) => {
-        if (firstData === secondData && firstData != '') {
+    checkYourName.forEach((_, i) => {
+      checkCrushName.forEach((_, j) => {
+        if (checkYourName[i] === checkCrushName[j] && checkYourName[i] != '') {
           checkYourName[i] = '';
           checkCrushName[j] = '';
         }
@@ -82,10 +82,12 @@ export class FlamesComponent {
       lastStandingLetter = lastStandingLetter.join('').split('');
     }
 
-    this.crushService.getCrush({ yourName, crushName }).subscribe(res => {
-      this.result = this.flames[lastStandingLetter.join('')];
+    let flamesRes = this.flames[lastStandingLetter.join('')]
+
+    this.crushService.getCrush({ yourName, crushName, flamesRes }).subscribe(res => {
+      this.result = flamesRes;
     }, err => {
-      this.result = this.flames[lastStandingLetter.join('')];
+      this.result = flamesRes;
     });
   }
 

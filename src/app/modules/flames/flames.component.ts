@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+import { FlamesModel } from './model/flames.model';
 import { CrushService } from './service/crush.service';
 
 @Component({
@@ -9,29 +11,14 @@ import { CrushService } from './service/crush.service';
 })
 export class FlamesComponent {
 
-  result: string = '';
+  flamesModel = new FlamesModel(this.fb);
 
-  isyourNameValidate: boolean;
-  iscrushNameValidate: boolean;
-
-  userData: FormGroup = this.fb.group({
-    yourName: ['', Validators.required],
-    crushName: ['', Validators.required]
-  });
-  flames = {
-    'f': 'Friends',
-    'l': 'Love',
-    'a': 'Affair',
-    'm': 'Marriage',
-    'e': 'Enemy',
-    's': 'Sister',
-  };
   fla = ['f', 'l', 'a', 'm', 'e', 's'];
 
   constructor(private fb: FormBuilder, private crushService: CrushService) { }
 
   get formDetails() {
-    return this.userData.controls;
+    return this.flamesModel.userData.controls;
   }
 
   get yourNameDetails() {
@@ -45,14 +32,14 @@ export class FlamesComponent {
 
   onSubmit() {
     this.checkOnSubmit();
-    if (this.userData.invalid) {
+    if (this.flamesModel.userData.invalid) {
       return;
     }
-    let { yourName, crushName } = this.userData.value;
+    let { yourName, crushName } = this.flamesModel.userData.value;
     let checkYourName = yourName.trim();
     let checkCrushName = crushName.trim();
     if (checkYourName == checkCrushName) {
-      this.result = 'Enemy';
+      this.flamesModel.result = 'Enemy';
       return;
     }
     var r = /\s+/g;
@@ -74,6 +61,7 @@ export class FlamesComponent {
     let lastStandingLetter = [...fla];
     while (lastStandingLetter.length > 1) {
       let removalIndex = lengthInput % lastStandingLetter.length;
+      this.flamesModel.removalOrder.push(lastStandingLetter[removalIndex]);
       lastStandingLetter[removalIndex] = ' ';
       lastStandingLetter = lastStandingLetter.join('').trim().split(' ');
       if (lastStandingLetter.length > 1) {
@@ -82,13 +70,37 @@ export class FlamesComponent {
       lastStandingLetter = lastStandingLetter.join('').split('');
     }
 
-    let flamesRes = this.flames[lastStandingLetter.join('')]
+    console.log(this.flamesModel.removalOrder)
+    let flamesRes = this.flamesModel.flames[lastStandingLetter.join('')]
 
-    this.crushService.getCrush({ yourName, crushName, flamesRes }).subscribe(res => {
-      this.result = flamesRes;
-    }, err => {
-      this.result = flamesRes;
-    });
+    this.crushService.getCrush({ yourName, crushName, flamesRes }).pipe(finalize(() => {
+      this.oneByOneRes();
+      this.flamesModel.result = flamesRes;
+    })).subscribe();
+  }
+
+  showResSlow() {
+    let time = 5;
+    let interval1 = setInterval(() => {
+      time--;
+      this.flamesModel.waitingForRes = `Result in ${time}`
+      if (!time) {
+        this.flamesModel.waitingForRes = this.flamesModel.result;
+        clearInterval(interval1);
+      }
+    }, 1000);
+  }
+
+  oneByOneRes() {
+    let interval = setInterval(() => {
+      const firstElement = this.flamesModel.removalOrder.shift();
+      let index = this.flamesModel.flamesTexts.findIndex(ele => ele.shortForm === firstElement);
+      this.flamesModel.flamesTexts[index].isCancel = true;
+      if (this.flamesModel.removalOrder.length < 1) {
+        clearInterval(interval);
+        this.showResSlow();
+      }
+    }, 1000);
   }
 
 
@@ -97,8 +109,15 @@ export class FlamesComponent {
   }
 
   checkOnSubmit() {
-    this.isyourNameValidate = true;
-    this.iscrushNameValidate = true;
+    this.flamesModel.isyourNameValidate = true;
+    this.flamesModel.iscrushNameValidate = true;
+  }
+
+  reset() {
+    this.flamesModel = new FlamesModel(this.fb);
+    if (this.flamesModel.interval) {
+
+    }
   }
 
 }

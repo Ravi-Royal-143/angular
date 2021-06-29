@@ -1,7 +1,7 @@
-<div class="centerOfScreen" [formGroup]="userData">
+<div class="centerOfScreen" [formGroup]="flamesModel.userData">
     <div class="p-col-12 p-xl-5 p-p-5 p-md-7 p-xs-12">
-        <div class="p-fluid  p-jc-center chat-border p-p-6" [ngClass]="{res : result}">
-            <div *ngIf="!result">
+        <div class="p-fluid  p-jc-center chat-border p-p-6" [ngClass]="{res : flamesModel.result}">
+            <div *ngIf="!flamesModel.result">
 
                 <div class="p-col-12">
                     <span class="royal-ft-wt-700"> FLAMES </span>
@@ -12,7 +12,7 @@
                         <input type="email" pInputText placeholder="Your Name" formControlName="yourName"
                             (blur)="onBlurFields('iscrushNameValidate')">
                     </div>
-                    <span class="royal-color-red" *ngIf="isyourNameValidate && !yourNameDetails.value">
+                    <span class="royal-color-red" *ngIf="flamesModel.isyourNameValidate && !yourNameDetails.value">
                         Enter Your Name</span>
                 </div>
                 <div class="p-col-12">
@@ -24,18 +24,28 @@
                         <input type="text" pInputText placeholder="Crush Name" formControlName="crushName"
                             (blur)="onBlurFields('iscrushNameValidate')">
                     </div>
-                    <span class="royal-color-red" *ngIf="isyourNameValidate && !crushNameFormDetails.value">
+                    <span class="royal-color-red" *ngIf="flamesModel.isyourNameValidate && !crushNameFormDetails.value">
                         Enter Your Crush Name</span>
                 </div>
                 <div class="p-col-12">
                     <p-button label="Calculate" (onClick)="onSubmit()"></p-button>
                 </div>
             </div>
-            <div *ngIf="result">
-                {{result | uppercase}}
+            <div *ngIf="flamesModel.result">
+                <div *ngIf="this.flamesModel.removalOrder.length > 1;then content else other_content">here is ignored</div>
+                <ng-template #content>
+                    <div *ngFor="let flames of flamesModel.flamesTexts">
+                        <div [ngClass]="{ 'txt-dcr-line-thr' : flames.isCancel}">
+                            {{flames.name}}
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #other_content> {{flamesModel.waitingForRes | uppercase}}
+                </ng-template>
             </div>
         </div>
-        <p-button *ngIf="result" label="Check Next Crush"  icon="pi pi-refresh" iconPos="right" (onClick)="result = ''">
+        <p-button *ngIf="flamesModel.result" label="Check Next Crush" icon="pi pi-refresh" iconPos="right"
+            (onClick)="reset()">
         </p-button>
     </div>
 </div>

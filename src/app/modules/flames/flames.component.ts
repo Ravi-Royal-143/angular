@@ -35,6 +35,16 @@ export class FlamesComponent {
     if (this.flamesModel.userData.invalid) {
       return;
     }
+
+    const { yourName, crushName, flamesRes } = this.flamesLogic();
+  
+    this.crushService.getCrush({ yourName, crushName, flamesRes }).pipe(finalize(() => {
+      this.oneByOneRes();
+      this.flamesModel.result = flamesRes;
+    })).subscribe();
+  }
+
+  flamesLogic() {
     let { yourName, crushName } = this.flamesModel.userData.value;
     let checkYourName = yourName.trim();
     let checkCrushName = crushName.trim();
@@ -69,14 +79,9 @@ export class FlamesComponent {
       }
       lastStandingLetter = lastStandingLetter.join('').split('');
     }
-
     console.log(this.flamesModel.removalOrder)
     let flamesRes = this.flamesModel.flames[lastStandingLetter.join('')]
-
-    this.crushService.getCrush({ yourName, crushName, flamesRes }).pipe(finalize(() => {
-      this.oneByOneRes();
-      this.flamesModel.result = flamesRes;
-    })).subscribe();
+    return { yourName, crushName, flamesRes };
   }
 
   showResSlow() {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavBarService } from '@modules/nav-bar/service/nav-bar.service';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { LogInService } from './service/log-in.service';
@@ -18,7 +18,7 @@ export class LogInComponent {
     password: ['', Validators.required]
   });
 
-  get formDetails(): { [key: string]: AbstractControl} {
+  get formDetails(): { [key: string]: AbstractControl } {
     return this.userInfo.controls;
   }
 
@@ -35,6 +35,7 @@ export class LogInComponent {
     private fb: FormBuilder,
     private logInService: LogInService,
     private router: Router,
+    private route: ActivatedRoute,
     private toastMessageService: ToastMessageService,
     private navBarService: NavBarService
 
@@ -50,8 +51,22 @@ export class LogInComponent {
       document.cookie = 'cookie' + '=' + res.cookie;
       this.navBarService.isLoggedIn.next(true);
       this.toastMessageService.showSuccessToast(['Sucessfully logged in.']);
-      this.router.navigate(['/']);
+      this.redirectionIfAny();
     });
+  }
+
+  redirectionIfAny() {
+    let redirectURL = '/';
+    let params = this.route.snapshot.queryParams;
+    if (params['redirectURL']) {
+      redirectURL = params['redirectURL'];
+    }
+    if (redirectURL) {
+      this.router.navigateByUrl(redirectURL)
+        .catch(() => this.router.navigate(['/']))
+    } else {
+      this.router.navigate(['/'])
+    }
   }
 
   onBlurFields(validateField): void {

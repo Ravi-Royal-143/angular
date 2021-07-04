@@ -8,12 +8,7 @@ export class NavBarService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
 
   constructor() {
-    const isLogged = document.cookie ? true : false;
-    this.isLoggedIn.next(isLogged);
-  }
-
-  ngOnInit() {
-
+    this.isLoggedIn.next(!!document.cookie);
   }
 
   startTImer() {

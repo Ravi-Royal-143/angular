@@ -16,7 +16,7 @@ export class IsauthenticatedService implements CanActivate, CanActivateChild {
     boolean | Observable<boolean> | Promise<boolean> {
     if (!document.cookie) {
       this.toastMessageService.showErrorToast(['Please Log in to continue']);
-      this.router.navigate(['auth', 'log-in']);
+      this.router.navigate(['auth', 'log-in'],{queryParams:{'redirectURL':state.url}});
     }
     return true;
   }

@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div *ngIf="flamesModel.result">
-                <div *ngIf="this.flamesModel.removalOrder.length > 1;then content else other_content">here is ignored</div>
+                <div *ngIf="this.flamesModel.removalOrder.length;then content else other_content">here is ignored</div>
                 <ng-template #content>
                     <div *ngFor="let flames of flamesModel.flamesTexts">
                         <div [ngClass]="{ 'txt-dcr-line-thr' : flames.isCancel}">

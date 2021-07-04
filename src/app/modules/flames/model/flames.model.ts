@@ -1,4 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { intervals } from "./flames.interface";
 
 export class FlamesModel {
 
@@ -9,7 +10,7 @@ export class FlamesModel {
     userData: FormGroup;
     isyourNameValidate: boolean;
     iscrushNameValidate: boolean;
-    interval;
+    intervals:intervals[] = [];
     removalOrder = [];
 
     constructor(private fb: FormBuilder) {

@@ -3,3 +3,8 @@ export interface FlamesReq {
     crushName: string;
     flamesRes: string;
 }
+
+export interface intervals {
+    name: string;
+    interval: NodeJS.Timeout;
+}

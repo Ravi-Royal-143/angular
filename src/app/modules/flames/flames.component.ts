@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
+import { FlamesReq } from './model/flames.interface';
 import { FlamesModel } from './model/flames.model';
 import { CrushService } from './service/crush.service';
 
@@ -30,21 +31,21 @@ export class FlamesComponent {
   }
 
 
-  onSubmit() {
+  onSubmit(): void {
     this.checkOnSubmit();
     if (this.flamesModel.userData.invalid) {
       return;
     }
 
     const { yourName, crushName, flamesRes } = this.flamesLogic();
-  
+
     this.crushService.getCrush({ yourName, crushName, flamesRes }).pipe(finalize(() => {
       this.oneByOneRes();
       this.flamesModel.result = flamesRes;
     })).subscribe();
   }
 
-  flamesLogic() {
+  flamesLogic(): FlamesReq {
     let { yourName, crushName } = this.flamesModel.userData.value;
     let checkYourName = yourName.trim();
     let checkCrushName = crushName.trim();
@@ -79,12 +80,11 @@ export class FlamesComponent {
       }
       lastStandingLetter = lastStandingLetter.join('').split('');
     }
-    console.log(this.flamesModel.removalOrder)
     let flamesRes = this.flamesModel.flames[lastStandingLetter.join('')]
     return { yourName, crushName, flamesRes };
   }
 
-  showResSlow() {
+  showResSlow(): void {
     let time = 5;
     let interval1 = setInterval(() => {
       time--;
@@ -92,8 +92,13 @@ export class FlamesComponent {
       if (!time) {
         this.flamesModel.waitingForRes = this.flamesModel.result;
         clearInterval(interval1);
+        this.removeIntervalFromModel('showResSlowinterval1');
       }
     }, 1000);
+    this.flamesModel.intervals.push({
+      name: 'showResSlowinterval',
+      interval: interval1
+    });
   }
 
   oneByOneRes() {
@@ -101,28 +106,37 @@ export class FlamesComponent {
       const firstElement = this.flamesModel.removalOrder.shift();
       let index = this.flamesModel.flamesTexts.findIndex(ele => ele.shortForm === firstElement);
       this.flamesModel.flamesTexts[index].isCancel = true;
-      if (this.flamesModel.removalOrder.length < 1) {
+      if (!this.flamesModel.removalOrder.length) {
         clearInterval(interval);
         this.showResSlow();
+        this.removeIntervalFromModel('oneByOneResinterval');
       }
-    }, 1000);
+    }, 2000);
+    this.flamesModel.intervals.push({
+      name: 'oneByOneResinterval',
+      interval: interval
+    });
   }
 
-
-  onBlurFields(validateField) {
+  onBlurFields(validateField): void {
     this[validateField] = true;
   }
 
-  checkOnSubmit() {
+  checkOnSubmit(): void {
     this.flamesModel.isyourNameValidate = true;
     this.flamesModel.iscrushNameValidate = true;
   }
 
-  reset() {
+  reset(): void {
     this.flamesModel = new FlamesModel(this.fb);
-    if (this.flamesModel.interval) {
-
+    if (this.flamesModel.intervals.length) {
+      this.flamesModel.intervals.map(data => this.removeIntervalFromModel(data.name));
     }
+  }
+
+  removeIntervalFromModel(removableIntervalName: string): void {
+    clearInterval(this.flamesModel.intervals.find(data => data.name == removableIntervalName)?.interval);
+    this.flamesModel.intervals = this.flamesModel.intervals.filter(data => data.name !== removableIntervalName)
   }
 
 }

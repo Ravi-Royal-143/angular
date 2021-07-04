@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { NavBarService } from '@modules/nav-bar/service/nav-bar.service';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
-import { LogInService } from './log-in/log-in.service';
+import { LogInService } from './service/log-in.service';
 
 @Component({
   selector: 'app-log-in',

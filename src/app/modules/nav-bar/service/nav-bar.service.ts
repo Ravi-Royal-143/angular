@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,16 @@ export class NavBarService {
   constructor() {
     const isLogged = document.cookie ? true : false;
     this.isLoggedIn.next(isLogged);
+  }
+
+  ngOnInit() {
+
+  }
+
+  startTImer() {
+    setInterval(() => {
+
+    }, 1000)
   }
 
 }

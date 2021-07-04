@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavBarService } from '@modules/nav-bar/service/nav-bar.service';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
@@ -18,15 +18,15 @@ export class LogInComponent {
     password: ['', Validators.required]
   });
 
-  get formDetails() {
+  get formDetails(): { [key: string]: AbstractControl} {
     return this.userInfo.controls;
   }
 
-  get gmailFormDetails() {
+  get gmailFormDetails(): AbstractControl {
     return this.formDetails.gmail;
   }
 
-  get passwordFormDetails() {
+  get passwordFormDetails(): AbstractControl {
     return this.formDetails.password;
   }
 
@@ -40,10 +40,9 @@ export class LogInComponent {
 
   ) { }
 
-  onSubmit() {
+  onSubmit(): void | undefined {
     this.checkOnSubmit();
     const { gmail, password } = this.userInfo.value;
-    let isFieldInvalid = false;
     if (this.userInfo.invalid) {
       return;
     }
@@ -55,11 +54,11 @@ export class LogInComponent {
     });
   }
 
-  onBlurFields(validateField) {
+  onBlurFields(validateField): void {
     this[validateField] = true;
   }
 
-  checkOnSubmit() {
+  checkOnSubmit(): void {
     this.isgmailValidate = true;
     this.ispasswordValidate = true;
   }

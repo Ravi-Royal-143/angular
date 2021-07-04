@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingService } from 'src/app/shared/loading/loading.service';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
@@ -31,27 +31,27 @@ export class SignUpComponent {
     private toastMessageService: ToastMessageService
   ) { }
 
-  get formDetails() {
+  get formDetails(): { [key: string]: AbstractControl } {
     return this.userSignUp.controls;
   }
 
-  get userNameFormDetails() {
+  get userNameFormDetails(): AbstractControl {
     return this.formDetails.username;
   }
 
-  get gmailFormDetails() {
+  get gmailFormDetails(): AbstractControl {
     return this.formDetails.gmail;
   }
 
-  get passwordFormDetails() {
+  get passwordFormDetails(): AbstractControl {
     return this.formDetails.password;
   }
 
-  get repasswordFormDetails() {
+  get repasswordFormDetails(): AbstractControl {
     return this.formDetails.repassword;
   }
 
-  onSubmit() {
+  onSubmit(): void | undefined {
     this.checkOnSubmit();
     const { username, gmail, password, repassword } = this.userSignUp.value;
     let isFieldInvalid = false;
@@ -66,18 +66,18 @@ export class SignUpComponent {
     });
   }
 
-  onBlurFields(validateField) {
+  onBlurFields(validateField): void {
     this[validateField] = true;
   }
 
-  checkOnSubmit() {
+  checkOnSubmit(): void {
     this.isgmailValidate = true;
     this.isUserNameValidate = true;
     this.ispasswordValidate = true;
     this.isrepasswordValidate = true;
   }
 
-  checkDataPresent() {
+  checkDataPresent(): boolean {
     const errMessage = [];
     Object.keys(this.userSignUp.controls).forEach(fieldName => {
       if (!this.formDetails[fieldName].value) {
@@ -91,7 +91,7 @@ export class SignUpComponent {
     return false;
   }
 
-  isPasswordSame(password, repassword) {
+  isPasswordSame(password, repassword): boolean {
     if (password !== repassword) {
       this.toastMessageService.showErrorToast(['Password must be same']);
       return true;

@@ -84,23 +84,6 @@ export class FlamesComponent {
     return { yourName, crushName, flamesRes };
   }
 
-  showResSlow(): void {
-    let time = 5;
-    let interval1 = setInterval(() => {
-      time--;
-      this.flamesModel.waitingForRes = `Result in ${time}`
-      if (!time) {
-        this.flamesModel.waitingForRes = this.flamesModel.result;
-        clearInterval(interval1);
-        this.removeIntervalFromModel('showResSlowinterval1');
-      }
-    }, 1000);
-    this.flamesModel.intervals.push({
-      name: 'showResSlowinterval',
-      interval: interval1
-    });
-  }
-
   oneByOneRes() {
     let interval = setInterval(() => {
       const firstElement = this.flamesModel.removalOrder.shift();
@@ -115,6 +98,23 @@ export class FlamesComponent {
     this.flamesModel.intervals.push({
       name: 'oneByOneResinterval',
       interval: interval
+    });
+  }
+  
+  showResSlow(): void {
+    let time = 5;
+    let interval1 = setInterval(() => {
+      time--;
+      this.flamesModel.waitingForRes = `Result in ${time}`
+      if (!time) {
+        this.flamesModel.waitingForRes = this.flamesModel.result;
+        clearInterval(interval1);
+        this.removeIntervalFromModel('showResSlowinterval1');
+      }
+    }, 1000);
+    this.flamesModel.intervals.push({
+      name: 'showResSlowinterval',
+      interval: interval1
     });
   }
 

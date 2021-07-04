@@ -1,16 +1,16 @@
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { intervals } from "./flames.interface";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { intervals } from './flames.interface';
 
 export class FlamesModel {
 
     flamesTexts: { name: string, isCancel: boolean, shortForm: string }[];
-    waitingForRes: string = 'Be ready';
+    waitingForRes = 'Be ready';
     flames: { [key: string]: string };
-    result: string = '';
+    result = '';
     userData: FormGroup;
     isyourNameValidate: boolean;
     iscrushNameValidate: boolean;
-    intervals:intervals[] = [];
+    intervals: intervals[] = [];
     removalOrder = [];
 
     constructor(private fb: FormBuilder) {
@@ -52,12 +52,12 @@ export class FlamesModel {
             crushName: ['', Validators.required]
         });
         this.flames = {
-            'f': 'Friends',
-            'l': 'Love',
-            'a': 'Affair',
-            'm': 'Marriage',
-            'e': 'Enemy',
-            's': 'Sister',
+            f: 'Friends',
+            l: 'Love',
+            a: 'Affair',
+            m: 'Marriage',
+            e: 'Enemy',
+            s: 'Sister',
         };
     }
 }

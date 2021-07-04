@@ -9,13 +9,13 @@ import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.
 export class IsauthenticatedService implements CanActivate, CanActivateChild {
 
   constructor(private router: Router,
-    private toastMessageService: ToastMessageService
+              private toastMessageService: ToastMessageService
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     boolean | Observable<boolean> | Promise<boolean> {
     if (!document.cookie) {
-      this.toastMessageService.showErrorToast(["Please Log in to continue"]);
+      this.toastMessageService.showErrorToast(['Please Log in to continue']);
       this.router.navigate(['auth', 'log-in']);
     }
     return true;

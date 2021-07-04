@@ -46,32 +46,32 @@ export class FlamesComponent {
   }
 
   flamesLogic(): FlamesReq {
-    let { yourName, crushName } = this.flamesModel.userData.value;
+    const { yourName, crushName } = this.flamesModel.userData.value;
     let checkYourName = yourName.trim();
     let checkCrushName = crushName.trim();
     if (checkYourName == checkCrushName) {
       this.flamesModel.result = 'Enemy';
       return;
     }
-    var r = /\s+/g;
-    checkYourName = checkYourName.toLowerCase().replace(r, "").split('');
-    checkCrushName = checkCrushName.toLowerCase().replace(r, "").split('');
+    const r = /\s+/g;
+    checkYourName = checkYourName.toLowerCase().replace(r, '').split('');
+    checkCrushName = checkCrushName.toLowerCase().replace(r, '').split('');
     checkYourName.forEach((_, i) => {
       checkCrushName.forEach((_, j) => {
         if (checkYourName[i] === checkCrushName[j] && checkYourName[i] != '') {
           checkYourName[i] = '';
           checkCrushName[j] = '';
         }
-      })
+      });
     });
-    checkYourName = checkYourName.join('')
-    checkCrushName = checkCrushName.join('')
+    checkYourName = checkYourName.join('');
+    checkCrushName = checkCrushName.join('');
     let lengthInput = checkYourName.length + checkCrushName.length;
-    let fla = ['f', 'l', 'a', 'm', 'e', 's'];
+    const fla = ['f', 'l', 'a', 'm', 'e', 's'];
     lengthInput = lengthInput - 1;
     let lastStandingLetter = [...fla];
     while (lastStandingLetter.length > 1) {
-      let removalIndex = lengthInput % lastStandingLetter.length;
+      const removalIndex = lengthInput % lastStandingLetter.length;
       this.flamesModel.removalOrder.push(lastStandingLetter[removalIndex]);
       lastStandingLetter[removalIndex] = ' ';
       lastStandingLetter = lastStandingLetter.join('').trim().split(' ');
@@ -80,14 +80,14 @@ export class FlamesComponent {
       }
       lastStandingLetter = lastStandingLetter.join('').split('');
     }
-    let flamesRes = this.flamesModel.flames[lastStandingLetter.join('')]
+    const flamesRes = this.flamesModel.flames[lastStandingLetter.join('')];
     return { yourName, crushName, flamesRes };
   }
 
   oneByOneRes() {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       const firstElement = this.flamesModel.removalOrder.shift();
-      let index = this.flamesModel.flamesTexts.findIndex(ele => ele.shortForm === firstElement);
+      const index = this.flamesModel.flamesTexts.findIndex(ele => ele.shortForm === firstElement);
       this.flamesModel.flamesTexts[index].isCancel = true;
       if (!this.flamesModel.removalOrder.length) {
         clearInterval(interval);
@@ -97,15 +97,15 @@ export class FlamesComponent {
     }, 2000);
     this.flamesModel.intervals.push({
       name: 'oneByOneResinterval',
-      interval: interval
+      interval
     });
   }
-  
+
   showResSlow(): void {
     let time = 5;
-    let interval1 = setInterval(() => {
+    const interval1 = setInterval(() => {
       time--;
-      this.flamesModel.waitingForRes = `Result in ${time}`
+      this.flamesModel.waitingForRes = `Result in ${time}`;
       if (!time) {
         this.flamesModel.waitingForRes = this.flamesModel.result;
         clearInterval(interval1);
@@ -136,7 +136,7 @@ export class FlamesComponent {
 
   removeIntervalFromModel(removableIntervalName: string): void {
     clearInterval(this.flamesModel.intervals.find(data => data.name == removableIntervalName)?.interval);
-    this.flamesModel.intervals = this.flamesModel.intervals.filter(data => data.name !== removableIntervalName)
+    this.flamesModel.intervals = this.flamesModel.intervals.filter(data => data.name !== removableIntervalName);
   }
 
 }

@@ -50,12 +50,12 @@ describe('AppComponent', () => {
       providers: [
         {
           provide: Router, useValue: {
-            url: "/url",
+            url: '/url',
             events: of(new NavigationEnd(0, '/url', '/endurl'))
           }
         },
         {
-          provide: ActivatedRoute , 
+          provide: ActivatedRoute ,
           useValue: {
             events: of('/'),
             createUrlTree: (commands, navExtras = {}) => { }

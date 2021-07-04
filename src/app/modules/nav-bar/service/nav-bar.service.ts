@@ -8,7 +8,7 @@ export class NavBarService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
 
   constructor() {
-    let isLogged = document.cookie ? true : false;
+    const isLogged = document.cookie ? true : false;
     this.isLoggedIn.next(isLogged);
   }
 

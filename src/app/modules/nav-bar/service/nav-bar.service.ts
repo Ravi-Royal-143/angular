@@ -8,6 +8,7 @@ export class NavBarService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
 
   constructor() {
+    console.log('isLogged', !!document.cookie)
     this.isLoggedIn.next(!!document.cookie);
   }
 

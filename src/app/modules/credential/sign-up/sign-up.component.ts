@@ -62,7 +62,7 @@ export class SignUpComponent {
     }
     this.signUpService.signUp({ gmail, password, username }).subscribe(res => {
       this.toastMessageService.showSuccessToast([res.message]);
-      this.router.navigate(['../', 'log-in'], { relativeTo: this.route });
+      this.router.navigate(['../', 'log-in'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
     });
   }
 

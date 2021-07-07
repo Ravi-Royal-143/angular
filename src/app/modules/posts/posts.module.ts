@@ -8,8 +8,10 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import {FileUploadModule} from 'primeng/fileupload';
-import {HttpClientModule} from '@angular/common/http';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 @NgModule({
   declarations: [
     PostsComponent,
@@ -23,7 +25,8 @@ import {HttpClientModule} from '@angular/common/http';
     InputTextModule,
     ButtonModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    InputTextareaModule 
   ]
 })
 export class PostsModule { }

@@ -7,6 +7,12 @@
                     <input type="email" pInputText placeholder="Title" formControlName="title">
                 </div>
             </div>
+            <div class="p-col-12 p-text-left">
+                <label cass="p-text-left p-ai-start">Summary</label>
+                <span class="p-float-label">
+                    <textarea rows="3" class="w-100" pInputTextarea formControlName="content"></textarea>
+                </span>
+            </div>
             <div class="p-col-12">
                 <div
                     *ngIf="imagePreview !== '' && imagePreview && postModel.postform.get('image').valid; then thenBlock else elseBlock">
@@ -26,7 +32,6 @@
                     </button>
                     <input type="file" #filePicker (change)="onImagePicked($event)">
                 </ng-template>
-
             </div>
         </div>
     </div>

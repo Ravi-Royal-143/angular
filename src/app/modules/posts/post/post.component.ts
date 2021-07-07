@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { mimeType } from './mime-type.validator';
 import { PostModel } from './model/post.model';
 
 @Component({
@@ -22,7 +23,7 @@ export class PostComponent implements OnInit {
       content: new FormControl(null, { validators: [Validators.required] }),
       image: new FormControl(null, {
         validators: [Validators.required],
-        // asyncValidators: [mimeType]
+        asyncValidators: [mimeType]
       })
     });
   }

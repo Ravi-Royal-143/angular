@@ -4,15 +4,24 @@
             <div class="p-col-12">
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="email" pInputText placeholder="Title" formControlName="title">
+                    <input type="Text" pInputText placeholder="Title" formControlName="title"
+                        (blur)="onBlurFields('istitleValidate')">
                 </div>
+                <span class="royal-color-red" *ngIf="postModel.istitleValidate && !titleFormDetails.value">
+                    Please Enter Title</span>
+                <span class="royal-color-red"
+                    *ngIf="postModel.istitleValidate && titleFormDetails.value && titleFormDetails.invalid">
+                    Enter atleast 3 characters</span>
             </div>
             <div class="p-col-12 p-text-left">
                 <label cass="p-text-left p-ai-start">Summary</label>
                 <span class="p-float-label">
-                    <textarea rows="3" class="w-100" pInputTextarea formControlName="content"></textarea>
+                    <textarea rows="3" class="w-100" pInputTextarea formControlName="content"
+                        (blur)="onBlurFields('isContentValidate')"></textarea>
                 </span>
             </div>
+            <span class="royal-color-red" *ngIf="postModel.isContentValidate && !contentFormDetails.value">
+                Please Enter Content</span>
             <div class="p-col-12">
                 <div
                     *ngIf="imagePreview !== '' && imagePreview && postModel.postform.get('image').valid; then thenBlock else elseBlock">
@@ -27,16 +36,22 @@
                     </div>
                 </ng-template>
                 <ng-template #elseBlock>
-                    <button pButton pRipple label="Pick Image" type="button" icon="pi pi-upload" iconPos="right"
-                        (click)="filePicker.click()">
-                    </button>
-                    <input type="file" #filePicker (change)="onImagePicked($event)">
+
+                    <div class="p-col-12">
+                        <button pButton pRipple label="Pick Image" type="button" icon="pi pi-upload" iconPos="right"
+                            (click)="filePicker.click()">
+                        </button>
+                        <input type="file" accept="image/png, image/jpeg" #filePicker (change)="onImagePicked($event)">
+                    </div>
+                    <span class="royal-color-red" *ngIf="imageFormDetails.errors?.invalidMimeType">
+                        Please Select Valid File(Supported File jpeg/png)
+                    </span>
                 </ng-template>
             </div>
         </div>
     </div>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="postModel.displayPopUp=false" label="Ok" styleClass="p-button-text">
+        <p-button icon="pi pi-check" (click)="onSubmit()" label="Ok" styleClass="p-button-text">
         </p-button>
     </ng-template>
 </p-dialog>

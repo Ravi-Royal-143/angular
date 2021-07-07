@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { mimeType } from './mime-type.validator';
 import { PostModel } from './model/post.model';
 
@@ -12,11 +13,14 @@ export class PostComponent implements OnInit {
   uploadedFiles: any[] = [];
   imagePreview: string;
   postModel = new PostModel();
-  constructor() { }
+
+  constructor(
+    private toastMessageService: ToastMessageService
+  ) { }
 
   ngOnInit(): void {
     this.postModel.displayPopUp = true;
-    this.postModel.postform =  new FormGroup({
+    this.postModel.postform = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
@@ -28,10 +32,40 @@ export class PostComponent implements OnInit {
     });
   }
 
+  get formDetails(): { [key: string]: AbstractControl } {
+    return this.postModel.postform.controls;
+  }
+
+  get titleFormDetails(): AbstractControl {
+    return this.formDetails.title;
+  }
+
+  get contentFormDetails(): AbstractControl {
+    return this.formDetails.content;
+  }
+
+  get imageFormDetails(): AbstractControl {
+    return this.formDetails.image;
+  }
+
+  get validityExceptImg() {
+    return this.formDetails.title.valid && this.formDetails.content.valid;
+  }
+
+  onSubmit() {
+    this.checkOnSubmit();
+    if (this.validityExceptImg && this.postModel.postform.invalid) {
+      this.toastMessageService.showErrorToast(['Please Select image']);
+    }
+    if (this.postModel.postform.valid) {
+      this.postModel.displayPopUp = false;
+    }
+  }
+
   removeImg() {
     this.postModel.postform.controls.image.setValue(null);
   }
-  
+
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.postModel.postform.patchValue({ image: file });
@@ -41,6 +75,15 @@ export class PostComponent implements OnInit {
       this.imagePreview = reader.result as string;
     };
     reader.readAsDataURL(file);
+  }
+
+  checkOnSubmit(): void {
+    this.postModel.istitleValidate = true;
+    this.postModel.isContentValidate = true;
+  }
+
+  onBlurFields(field: string) {
+    this.postModel[field] = true;
   }
 
 }

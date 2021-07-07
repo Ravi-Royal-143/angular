@@ -48,11 +48,19 @@ export class LogInComponent {
       return;
     }
     this.logInService.authenticate({ gmail, password }).subscribe(res => {
-      document.cookie = 'cookie' + '=' + res.cookie;
+      document.cookie = 'cookie' + '=' + res.cookie+ ';expires='+this.expTime().toUTCString()+';path=/'
       this.navBarService.isLoggedIn.next(true);
       this.toastMessageService.showSuccessToast(['Sucessfully logged in.']);
       this.redirectionIfAny();
     });
+  }
+
+  expTime() {
+    var now = new Date();
+    var time = now.getTime();
+    var expireTime = time + 1000 * 36000;
+    now.setTime(expireTime);
+    return now;
   }
 
   redirectionIfAny() {

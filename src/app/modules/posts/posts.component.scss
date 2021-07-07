@@ -1,0 +1,7 @@
+.btn-size {
+    width: 3rem !important;
+    height: 3rem !important;
+    ::ng-deep .pi {
+        font-size: 2rem !important;
+    }
+}

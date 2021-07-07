@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDetailsRoutingModule } from './user-details-routing.module';
+import { FlamesModule } from '@modules/flames/flames.module';
 
 @NgModule({
   declarations: [UserDetailsComponent],
@@ -15,7 +16,8 @@ import { UserDetailsRoutingModule } from './user-details-routing.module';
     InputTextModule,
     ButtonModule,
     ReactiveFormsModule,
-    UserDetailsRoutingModule
+    UserDetailsRoutingModule,
+    FlamesModule
   ]
 })
 export class UserDetailsModule { }

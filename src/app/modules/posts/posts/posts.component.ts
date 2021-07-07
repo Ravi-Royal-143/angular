@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostsModel } from './model/posts.model';
 
 @Component({
   selector: 'app-posts',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
+  postsModel = new PostsModel();
   constructor() { }
 
   ngOnInit(): void {
+    this.postsModel.openDialog = true;
   }
 
+  addPost() {
+    this.postsModel.openDialog = true;
+  }
 }

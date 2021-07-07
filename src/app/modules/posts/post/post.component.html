@@ -1,1 +1,37 @@
-<p>post works!</p>
+<p-dialog header="Add Post" [(visible)]="postModel.displayPopUp" [style]="{width: '75vw'}" [baseZIndex]="10000">
+    <div class="centerOfScreen" [formGroup]="postModel.postform">
+        <div class="p-col-12">
+            <div class="p-col-12">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input type="email" pInputText placeholder="Title" formControlName="title">
+                </div>
+            </div>
+            <div class="p-col-12">
+                <div
+                    *ngIf="imagePreview !== '' && imagePreview && postModel.postform.get('image').valid; then thenBlock else elseBlock">
+                </div>
+                <ng-template #thenBlock>
+                    <div class="p-col-12">
+                        <button pButton pRipple type="button" label="Remove Image" icon="pi pi-times" iconPos="right"
+                            class="p-button-rounded p-button-danger" (click)="removeImg()"></button>
+                        <div class="image-preview p-mt-1">
+                            <img class="prv-img-sz" [src]="imagePreview" [alt]="postModel.postform.value.title">
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #elseBlock>
+                    <button pButton pRipple label="Pick Image" type="button" icon="pi pi-upload" iconPos="right"
+                        (click)="filePicker.click()">
+                    </button>
+                    <input type="file" #filePicker (change)="onImagePicked($event)">
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="postModel.displayPopUp=false" label="Ok" styleClass="p-button-text">
+        </p-button>
+    </ng-template>
+</p-dialog>

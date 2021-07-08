@@ -10,6 +10,10 @@ const nodeEndPoints = {
     post: 'post'
 };
 
+const webSocketEndPoints = {
+    post: 'post'
+};
+
 function getAPIUrls(endpointRoot: string, endPoints: { [key: string]: string }): { [key: string]: string } {
     const urls = {};
 
@@ -21,3 +25,4 @@ function getAPIUrls(endpointRoot: string, endPoints: { [key: string]: string }):
 }
 
 export const mynodeEndPoint = getAPIUrls(myurlnodeUrl, nodeEndPoints);
+export const webSocketEndPoint = getAPIUrls(websockerUrl, webSocketEndPoints);

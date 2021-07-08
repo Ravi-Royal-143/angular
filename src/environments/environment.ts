@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   url: 'http://localhost:3000',
-  websockerUrl: 'https://raviroyal143.herokuapp.com/'
+  websockerUrl: 'https://raviroyal143.herokuapp.com'
 };
 
 /*

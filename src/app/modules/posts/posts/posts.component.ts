@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsRes } from './model/posts.interface';
+import { fetchedPosts, PostsRes } from './model/posts.interface';
 import { PostsModel } from './model/posts.model';
 import { PostsService } from './service/posts.service';
 
@@ -21,6 +21,12 @@ export class PostsComponent implements OnInit {
   getPosts() {
     this.postsService.getPosts().subscribe((data: PostsRes) => {
       this.postsModel.posts = data.posts;
+      this.postsModel.posts.forEach((post: fetchedPosts) => {
+        let imgTitle = post.imagePath.split("/").pop().split("-");
+        imgTitle.pop();
+        post.imgTitle = imgTitle.join('-');
+        console.log(imgTitle) 
+      })
     })
   }
   addPost() {

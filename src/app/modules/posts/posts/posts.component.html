@@ -1,7 +1,7 @@
 <div class="p-col">
 
     <div>
-        <div class="position-fixed royal-sp-b-2 royal-sp-r-2">
+        <div class="position-fixed royal-sp-b-2 royal-sp-r-2 btn-index">
             <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded btn-size"
                 (click)="addPost()"></button>
         </div>
@@ -12,7 +12,7 @@
         <div *ngFor="let post of postsModel.posts; index as i">
             <div class="card border-info mb-3">
                 <div class="card-header"> {{post.title}}</div>
-                <img class="card-img-top" [src]="post.imagePath" [alt]="post.title">
+                <img class="card-img-top" [src]="post.imagePath" [alt]="post.imgTitle">
                 <div class="card-body">
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's

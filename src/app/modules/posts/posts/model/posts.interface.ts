@@ -9,7 +9,8 @@ export interface PostsRes {
 }
 
 export interface fetchedPosts {
-    image: File;
+    imagePath: string;
     title: string;
     content: string;
+    imgTitle: string;
 }

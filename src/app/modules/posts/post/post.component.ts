@@ -69,8 +69,7 @@ export class PostComponent implements OnInit {
 
   savePost() {
     this.postService.savePost(this.postModel.postform.value).subscribe((res) => {
-      this.postModel.displayPopUp = false;
-      this.savedPost.emit();
+      this.onClosing();
     });
   }
 
@@ -96,6 +95,11 @@ export class PostComponent implements OnInit {
 
   onBlurFields(field: string) {
     this.postModel[field] = true;
+  }
+
+  onClosing() {
+    this.postModel.displayPopUp = false;
+    this.savedPost.emit();
   }
 
 }

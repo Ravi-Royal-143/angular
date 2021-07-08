@@ -12,10 +12,15 @@ export class PostsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.postsModel.openDialog = true;
+    // this.postsModel.openDialog = true;
   }
 
   addPost() {
     this.postsModel.openDialog = true;
   }
+  
+  onSavePost() {
+    this.postsModel.openDialog = false;
+  }
+
 }

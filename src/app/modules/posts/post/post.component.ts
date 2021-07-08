@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { mimeType } from './mime-type.validator';
 import { PostModel } from './model/post.model';
+import { PostService } from './service/post.service';
 
 @Component({
   selector: 'app-post',
@@ -10,12 +11,15 @@ import { PostModel } from './model/post.model';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+
+  @Output() savedPost = new EventEmitter<void>();
   uploadedFiles: any[] = [];
   imagePreview: string;
   postModel = new PostModel();
 
   constructor(
-    private toastMessageService: ToastMessageService
+    private toastMessageService: ToastMessageService,
+    private postService: PostService
   ) { }
 
   ngOnInit(): void {
@@ -58,8 +62,16 @@ export class PostComponent implements OnInit {
       this.toastMessageService.showErrorToast(['Please Select image']);
     }
     if (this.postModel.postform.valid) {
-      this.postModel.displayPopUp = false;
+      this.savePost();
+
     }
+  }
+
+  savePost() {
+    this.postService.savePost(this.postModel.postform.value).subscribe((res) => {
+      this.postModel.displayPopUp = false;
+      this.savedPost.emit();
+    });
   }
 
   removeImg() {

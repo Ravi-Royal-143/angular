@@ -4,4 +4,4 @@
     </div>
 </div>
 
-<app-post *ngIf="postsModel.openDialog"></app-post>
+<app-post *ngIf="postsModel.openDialog" (savedPost)="onSavePost()"></app-post>

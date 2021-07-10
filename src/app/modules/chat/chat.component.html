@@ -1,7 +1,9 @@
 <div class="p-p-4">
 
     <p-card header="Chat Started" styleClass="chatBody">
-
+        <div class="p-text-center">
+            {{welcomeMsg}}
+        </div>
         <div *ngFor="let chat of chats">
             <div *ngIf="chat.type == 'recieved'; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>

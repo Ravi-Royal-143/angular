@@ -10,6 +10,7 @@ import { WebsocketRes } from '../model/interface';
 export class ChatService {
   socket;
   latestChat = new Subject();
+  myMessage = new Subject();
 
   constructor() { }
 
@@ -17,6 +18,9 @@ export class ChatService {
     this.socket = io(myurlnodeUrl, { transports: ['websocket', 'polling', 'flashsocket'] });
     this.socket.on('message-broadcast', (data: WebsocketRes) => {
       this.latestChat.next(data);
+    });
+    this.socket.on('message', (data: WebsocketRes) => {
+      this.myMessage.next(data);
     });
   }
 

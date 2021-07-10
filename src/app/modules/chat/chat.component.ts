@@ -37,7 +37,7 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
     this.chat = '';
   }
 
-  addToChat(type: 'recieved' | 'sent', content: string = '', sender: string = '') {
+  addToChat(type: 'recieved' | 'sent', content: string = '', sender: string = ' ANONYMOUS') {
     this.chats.push({
       type,
       content,

@@ -13,6 +13,7 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
 
   chat: string;
   welcomeMsg: string;
+  leftMsg: string[] = [];
   chats: ({ type: string } & WebsocketRes)[] = [];
 
   constructor(private chatService: ChatService) {
@@ -27,7 +28,10 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
     const sub2$ = this.chatService.myMessage.subscribe((data: string) => {
       this.welcomeMsg = data;
     });
-    this.addsub(sub$, sub2$);
+    const sub3$ = this.chatService.leftMessage.subscribe((data: string) => {
+      this.leftMsg.push(data);
+    });
+    this.addsub(sub$, sub2$, sub3$);
   }
 
   ngOnDestroy() {

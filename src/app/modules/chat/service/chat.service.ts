@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { io } from 'socket.io-client';
 import { myurlnodeUrl } from 'src/app/urls/url';
+import { WebsocketRes } from '../model/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ChatService {
 
   setupSocketConnection() {
     this.socket = io(myurlnodeUrl, { transports: ['websocket', 'polling', 'flashsocket'] });
-    this.socket.on('message-broadcast', (data: string) => {
+    this.socket.on('message-broadcast', (data: WebsocketRes) => {
       this.latestChat.next(data);
     });
   }

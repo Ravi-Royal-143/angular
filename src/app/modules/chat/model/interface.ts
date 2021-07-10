@@ -1,5 +1,4 @@
-export interface Message {
+export interface WebsocketRes {
     sender: string;
     content: string;
-    isBroadcast: boolean;
 }

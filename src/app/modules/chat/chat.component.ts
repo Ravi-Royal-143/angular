@@ -1,10 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { Message } from './model/interface';
+import { WebsocketRes } from './model/interface';
 import { ChatService } from './service/chat.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -12,10 +9,10 @@ import { Subject } from 'rxjs';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, OnDestroy {
-  @ViewChild('textRef', {static: false}) textRef: ElementRef;
+  @ViewChild('textRef', { static: false }) textRef: ElementRef;
 
   chat: string;
-  chats: { type: string, message: string }[] = [];
+  chats: ({ type: string } & WebsocketRes)[] = [];
 
   constructor(private chatService: ChatService) {
     super();
@@ -23,8 +20,8 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
 
   ngOnInit() {
     this.chatService.setupSocketConnection();
-    const sub$ = this.chatService.latestChat.subscribe((data: string) => {
-      this.addToChat('recieved', data);
+    const sub$ = this.chatService.latestChat.subscribe((data: WebsocketRes) => {
+      this.addToChat('recieved', data.content, data.sender);
     });
     this.addsub(sub$);
   }
@@ -35,15 +32,16 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
 
   onSend() {
     this.chatService.SendMessage(this.chat);
-    this.addToChat('sent', this.chat);
+    this.addToChat('sent', this.chat, 'YOU');
     this.textRef.nativeElement.focus();
     this.chat = '';
   }
 
-  addToChat(type: 'recieved' | 'sent', message: string = '') {
+  addToChat(type: 'recieved' | 'sent', content: string = '', sender: string = '') {
     this.chats.push({
       type,
-      message
+      content,
+      sender
     });
   }
 }

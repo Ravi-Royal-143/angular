@@ -25,7 +25,6 @@ export class PostsComponent implements OnInit {
         let imgTitle = post.imagePath.split("/").pop().split("-");
         imgTitle.pop();
         post.imgTitle = imgTitle.join('-');
-        console.log(imgTitle) 
       })
     })
   }

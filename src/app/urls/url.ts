@@ -1,7 +1,6 @@
 import { environment } from 'src/environments/environment';
 
 export const myurlnodeUrl = environment.url;
-export const websockerUrl = environment.websockerUrl;
 
 const nodeEndPoints = {
     logIn: 'auth/log-in',
@@ -25,4 +24,3 @@ function getAPIUrls(endpointRoot: string, endPoints: { [key: string]: string }):
 }
 
 export const mynodeEndPoint = getAPIUrls(myurlnodeUrl, nodeEndPoints);
-export const webSocketEndPoint = getAPIUrls(websockerUrl, webSocketEndPoints);

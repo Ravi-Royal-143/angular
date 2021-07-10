@@ -1,6 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { Message } from './model/interface';
 import { ChatService } from './service/chat.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -42,5 +46,4 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
       message
     });
   }
-
 }

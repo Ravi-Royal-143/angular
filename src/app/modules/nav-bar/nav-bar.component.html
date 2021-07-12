@@ -1,35 +1,35 @@
 <div class="">
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a class="navbar-brand" [routerLink]="['user-details', 'flames']">Royal</a>
+    <a class="navbar-brand" [routerLink]="['user-details', 'flames']" class="font-weight-bold text-primary ft-sz-2rem">Royal</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
       aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <div class="collapse navbar-collapse p-ml-2" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <!-- <li class="nav-item active">
           <a class="nav-link" [routerLink]="['user-details', 'flames']">Home</a>
         </li> -->
-        <li class="nav-item">
+        <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="['user-details', 'chat']">Chat</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="['user-details', 'flames']">Flames</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="['posts']">Posts</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
+        <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" *ngIf="!isLoggedIn" [routerLink]="['auth', 'sign-up']"  queryParamsHandling="preserve"> Sign Up <span
               class="pi pi-user"></span></a>
         </li>
-        <li class="nav-item" *ngIf="!isLoggedIn">
+        <li class="nav-item" [routerLinkActive]="['active']" *ngIf="!isLoggedIn">
           <a class="nav-link" [routerLink]="['auth', 'log-in']"  queryParamsHandling="preserve"> Login <span class="pi pi-sign-in"></span></a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn" (click)="logOut()">
+        <li class="nav-item" [routerLinkActive]="['active']" *ngIf="isLoggedIn" (click)="logOut()">
           <a class="nav-link"> Log Out <span class="pi pi-sign-out"></span></a>
         </li>
       </ul>

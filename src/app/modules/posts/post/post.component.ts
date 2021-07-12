@@ -14,7 +14,10 @@ export class PostComponent implements OnInit {
 
   @Input() editData;
 
-  @Output() savedPost = new EventEmitter<void>();
+  @Output() savedPost = new EventEmitter<{
+    isSaved: boolean,
+    post: any
+  }>();
   uploadedFiles: any[] = [];
   imagePreview: string;
   postModel = new PostModel();
@@ -80,7 +83,12 @@ export class PostComponent implements OnInit {
   savePost() {
     const postData = this.addFormData();
     this.postService.savePost(postData, !!this.editData).subscribe((res) => {
+      this.toastMessageService.showSuccessToast([res.message])
       this.onClosing();
+      this.savedPost.emit({
+        isSaved: true,
+        post: res.postDetails
+      });
     });
   }
 
@@ -128,7 +136,14 @@ export class PostComponent implements OnInit {
 
   onClosing() {
     this.postModel.displayPopUp = false;
-    this.savedPost.emit();
+  }
+
+  onClickClose() {
+    this.onClosing();
+    this.savedPost.emit({
+      isSaved: false,
+      post: null
+    });
   }
 
   editValPatch() {

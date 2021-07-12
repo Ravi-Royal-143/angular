@@ -32,4 +32,4 @@
 </div>
 
 
-<app-post *ngIf="postsModel.openDialog" (savedPost)="onSavePost()" [editData]="postsModel.editPostData"></app-post>
+<app-post *ngIf="postsModel.openDialog" (savedPost)="onSavePost($event)" [editData]="postsModel.editPostData"></app-post>

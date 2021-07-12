@@ -6,7 +6,6 @@
                 (click)="addPost()"></button>
         </div>
     </div>
-
     <div class="card-columns">
         <div *ngFor="let post of postsModel.posts; index as i">
             <div class="card border-info mb-3">
@@ -28,8 +27,11 @@
             </div>
         </div>
     </div>
-    
+
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="postsModel.pagination.rowsPerPage"
+        [totalRecords]="postsModel.pagination.totalRec" [rowsPerPageOptions]="[2,5,10,20,30]"></p-paginator>
 </div>
 
 
-<app-post *ngIf="postsModel.openDialog" (savedPost)="onSavePost($event)" [editData]="postsModel.editPostData"></app-post>
+<app-post *ngIf="postsModel.openDialog" (savedPost)="onSavePost($event)" [editData]="postsModel.editPostData">
+</app-post>

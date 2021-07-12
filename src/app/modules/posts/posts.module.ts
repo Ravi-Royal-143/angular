@@ -11,7 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   declarations: [
     PostsComponent,
@@ -26,7 +26,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ButtonModule,
     FileUploadModule,
     HttpClientModule,
-    InputTextareaModule 
+    PaginatorModule,
+    InputTextareaModule
   ]
 })
 export class PostsModule { }

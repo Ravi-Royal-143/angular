@@ -19,3 +19,14 @@ export interface fetchedPosts {
     imageViewId: string;
     img: string;
 }
+
+export interface PaginationReq {
+    pageSize: number;
+    page: number;
+}
+
+export interface Pagination {
+    page: number;
+    totalRec: number;
+    rowsPerPage: number;
+}

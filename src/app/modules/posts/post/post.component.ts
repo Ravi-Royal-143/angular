@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { mimeType } from './mime-type.validator';
@@ -12,6 +12,8 @@ import { PostService } from './service/post.service';
 })
 export class PostComponent implements OnInit {
 
+  @Input() editData;
+
   @Output() savedPost = new EventEmitter<void>();
   uploadedFiles: any[] = [];
   imagePreview: string;
@@ -23,17 +25,21 @@ export class PostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.editData) {
+      this.editValPatch();
+    } else {
+      this.postModel.postform = new FormGroup({
+        title: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(3)]
+        }),
+        content: new FormControl(null, { validators: [Validators.required] }),
+        image: new FormControl(null, {
+          validators: [Validators.required],
+          asyncValidators: [mimeType]
+        })
+      });
+    }
     this.postModel.displayPopUp = true;
-    this.postModel.postform = new FormGroup({
-      title: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(3)]
-      }),
-      content: new FormControl(null, { validators: [Validators.required] }),
-      image: new FormControl(null, {
-        validators: [Validators.required],
-        asyncValidators: [mimeType]
-      })
-    });
   }
 
   get formDetails(): { [key: string]: AbstractControl } {
@@ -56,6 +62,10 @@ export class PostComponent implements OnInit {
     return this.formDetails.title.valid && this.formDetails.content.valid;
   }
 
+  get imgValueType() {
+    return typeof (this.postModel.postform.value.image) == 'string'
+  }
+
   onSubmit() {
     this.checkOnSubmit();
     if (this.validityExceptImg && this.postModel.postform.invalid) {
@@ -68,9 +78,27 @@ export class PostComponent implements OnInit {
   }
 
   savePost() {
-    this.postService.savePost(this.postModel.postform.value).subscribe((res) => {
+    const postData = this.addFormData();
+    this.postService.savePost(postData, !!this.editData).subscribe((res) => {
       this.onClosing();
     });
+  }
+
+
+  addFormData() {
+    const { title, content, image } = this.postModel.postform.value;
+    const postData = new FormData();
+    postData.append("title", title);
+    postData.append("content", content);
+    if (this.imgValueType) {
+      postData.append("image", image);
+    } else {
+      postData.append("image", image, title);
+    }
+    if (this.editData) {
+      postData.append('_id', this.editData._id);
+    }
+    return postData;
   }
 
   removeImg() {
@@ -100,6 +128,39 @@ export class PostComponent implements OnInit {
   onClosing() {
     this.postModel.displayPopUp = false;
     this.savedPost.emit();
+  }
+
+  editValPatch() {
+    const reqData = this.convetToEditVAl();
+    this.postModel.postform = new FormGroup({
+      title: new FormControl(reqData.title, {
+        validators: [Validators.required, Validators.minLength(3)]
+      }),
+      content: new FormControl(reqData.content, { validators: [Validators.required] }),
+      image: new FormControl(reqData.imageTitle)
+    });
+  }
+
+  removeImgControl() {
+    this.postModel.postform.removeControl('image');
+  }
+  addImgValidator() {
+    this.postModel.postform.addControl('image', new FormControl(null, {
+      validators: [Validators.required],
+      asyncValidators: [mimeType]
+    }));
+  }
+
+  convetToEditVAl() {
+    const title = this.editData.title;
+    const content = this.editData.content;
+    const imageTitle = this.editData.imageTitle;
+    return { title, content, imageTitle };
+  }
+
+  removeAttachment() {
+    this.removeImgControl();
+    this.addImgValidator();
   }
 
 }

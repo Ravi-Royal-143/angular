@@ -11,17 +11,12 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  addFormData(title: string, content: string, image: File) {
-    const postData = new FormData();
-    postData.append("title", title);
-    postData.append("content", content);
-    postData.append("image", image, title);
-    return postData;
+
+  savePost(payload, isEdit: boolean): Observable<any> {
+    if (isEdit) {
+      return this.http.put(mynodeEndPoint.post, payload);
+    }
+    return this.http.post(mynodeEndPoint.post, payload);
   }
 
-  savePost(payload: AddPost): Observable<any> {
-    const postData = this.addFormData(payload.title, payload.content, payload.image);
-    return this.http.post(mynodeEndPoint.post, postData);
-  }
-  
 }

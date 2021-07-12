@@ -27,13 +27,20 @@ export class PostsComponent implements OnInit {
       })
     })
   }
+
   addPost() {
     this.postsModel.openDialog = true;
   }
 
   onSavePost() {
     this.postsModel.openDialog = false;
+    this.postsModel.editPostData = null;
     this.getPosts();
+  }
+
+  onEditPost(data) {
+    this.postsModel.editPostData = data;
+    this.postsModel.openDialog = true;
   }
 
 }

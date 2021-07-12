@@ -6,7 +6,8 @@ const nodeEndPoints = {
     logIn: 'auth/log-in',
     signUp: 'auth/sign-up',
     crush: 'crush',
-    post: 'post'
+    post: 'post',
+    deletePost: 'post/<id>'
 };
 
 

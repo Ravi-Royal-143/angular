@@ -42,4 +42,11 @@ export class PostsComponent implements OnInit {
     this.postsModel.openDialog = true;
   }
 
+  onDeletePost(post) {
+    this.postsService.deletePost(post).subscribe((data) => {
+      console.log("deleted success")
+      this.postsModel.posts = this.postsModel.posts.filter(data => data._id !== post._id);
+    })
+  }
+
 }

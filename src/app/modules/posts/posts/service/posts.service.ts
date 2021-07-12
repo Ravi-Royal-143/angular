@@ -13,4 +13,8 @@ export class PostsService {
     return this.http.get(mynodeEndPoint.post);
   }
 
+  deletePost(post) {
+    return this.http.delete(mynodeEndPoint.deletePost.replace('<id>', post._id) );
+  }
+
 }

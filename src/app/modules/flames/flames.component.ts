@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
+import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { FlamesReq } from './model/flames.interface';
 import { FlamesModel } from './model/flames.model';
 import { CrushService } from './service/crush.service';
@@ -10,13 +11,15 @@ import { CrushService } from './service/crush.service';
   templateUrl: './flames.component.html',
   styleUrls: ['./flames.component.scss']
 })
-export class FlamesComponent {
+export class FlamesComponent extends AutoUnsubscribeComponent {
 
   flamesModel = new FlamesModel(this.fb);
 
   fla = ['f', 'l', 'a', 'm', 'e', 's'];
 
-  constructor(private fb: FormBuilder, private crushService: CrushService) { }
+  constructor(private fb: FormBuilder, private crushService: CrushService) {
+    super();
+   }
 
   get formDetails() {
     return this.flamesModel.userData.controls;
@@ -39,10 +42,11 @@ export class FlamesComponent {
 
     const { yourName, crushName, flamesRes } = this.flamesLogic();
 
-    this.crushService.getCrush({ yourName, crushName, flamesRes }).pipe(finalize(() => {
+    const sub$ = this.crushService.getCrush({ yourName, crushName, flamesRes }).pipe(finalize(() => {
       this.oneByOneRes();
       this.flamesModel.result = flamesRes;
     })).subscribe();
+    this.addsub(sub$);
   }
 
   flamesLogic(): FlamesReq {

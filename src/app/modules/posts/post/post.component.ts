@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { mimeType } from './mime-type.validator';
 import { PostModel } from './model/post.model';
@@ -10,7 +11,7 @@ import { PostService } from './service/post.service';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnInit {
+export class PostComponent extends AutoUnsubscribeComponent implements OnInit {
 
   @Input() editData;
 
@@ -25,7 +26,9 @@ export class PostComponent implements OnInit {
   constructor(
     private toastMessageService: ToastMessageService,
     private postService: PostService
-  ) { }
+  ) { 
+    super();
+  }
 
   ngOnInit(): void {
     if (this.editData) {
@@ -82,7 +85,7 @@ export class PostComponent implements OnInit {
 
   savePost() {
     const postData = this.addFormData();
-    this.postService.savePost(postData, !!this.editData).subscribe((res) => {
+    const sub$ = this.postService.savePost(postData, !!this.editData).subscribe((res) => {
       this.toastMessageService.showSuccessToast([res.message])
       this.onClosing();
       this.savedPost.emit({
@@ -90,6 +93,7 @@ export class PostComponent implements OnInit {
         post: res.postDetails
       });
     });
+    this.addsub(sub$);
   }
 
 

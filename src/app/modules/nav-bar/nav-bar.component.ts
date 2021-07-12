@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { NavBarService } from './service/nav-bar.service';
 
@@ -7,16 +8,19 @@ import { NavBarService } from './service/nav-bar.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent extends AutoUnsubscribeComponent implements OnInit {
 
   isLoggedIn: boolean;
 
-  constructor(private navBarService: NavBarService, private toastMessageService: ToastMessageService) { }
+  constructor(private navBarService: NavBarService, private toastMessageService: ToastMessageService) { 
+    super();
+  }
 
   ngOnInit(): void {
-    this.navBarService.isLoggedIn.subscribe((data: boolean) => {
+    const sub$ = this.navBarService.isLoggedIn.subscribe((data: boolean) => {
       this.isLoggedIn = data;
     });
+    this.addsub(sub$);
   }
 
   logOut() {

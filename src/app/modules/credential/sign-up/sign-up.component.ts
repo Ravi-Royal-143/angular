@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { LoadingService } from 'src/app/shared/loading/loading.service';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { SignUpService } from './service/sign-up.service';
@@ -10,7 +11,7 @@ import { SignUpService } from './service/sign-up.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent {
+export class SignUpComponent extends AutoUnsubscribeComponent {
 
   isgmailValidate: boolean;
   isUserNameValidate: boolean;
@@ -29,7 +30,9 @@ export class SignUpComponent {
     private router: Router,
     private route: ActivatedRoute,
     private toastMessageService: ToastMessageService
-  ) { }
+  ) { 
+    super();
+  }
 
   get formDetails(): { [key: string]: AbstractControl } {
     return this.userSignUp.controls;
@@ -60,10 +63,11 @@ export class SignUpComponent {
     if (isFieldInvalid) {
       return;
     }
-    this.signUpService.signUp({ gmail, password, username }).subscribe(res => {
+    const sub$ = this.signUpService.signUp({ gmail, password, username }).subscribe(res => {
       this.toastMessageService.showSuccessToast([res.message]);
       this.router.navigate(['../', 'log-in'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
     });
+    this.addsub(sub$);
   }
 
   onBlurFields(validateField): void {

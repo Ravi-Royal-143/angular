@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavBarService } from '@modules/nav-bar/service/nav-bar.service';
+import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { LogInService } from './service/log-in.service';
 
@@ -10,7 +11,7 @@ import { LogInService } from './service/log-in.service';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss']
 })
-export class LogInComponent {
+export class LogInComponent extends AutoUnsubscribeComponent {
   isgmailValidate: boolean;
   ispasswordValidate: boolean;
   userInfo: FormGroup = this.fb.group({
@@ -38,8 +39,9 @@ export class LogInComponent {
     private route: ActivatedRoute,
     private toastMessageService: ToastMessageService,
     private navBarService: NavBarService
-
-  ) { }
+  ) {
+    super();
+   }
 
   onSubmit(): void | undefined {
     this.checkOnSubmit();
@@ -47,12 +49,13 @@ export class LogInComponent {
     if (this.userInfo.invalid) {
       return;
     }
-    this.logInService.authenticate({ gmail, password }).subscribe(res => {
+    const sub$ = this.logInService.authenticate({ gmail, password }).subscribe(res => {
       document.cookie = 'cookie' + '=' + res.cookie+ ';expires='+this.expTime().toUTCString()+';path=/'
       this.navBarService.isLoggedIn.next(true);
       this.toastMessageService.showSuccessToast(['Sucessfully logged in.']);
       this.redirectionIfAny();
     });
+    this.addsub(sub$);
   }
 
   expTime() {

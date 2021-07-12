@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { fetchedPosts, PaginationReq, PostsRes } from './model/posts.interface';
 import { PostsModel } from './model/posts.model';
@@ -9,12 +10,14 @@ import { PostsService } from './service/posts.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
 
   img = "https://drive.google.com/uc?export=view&id=<GoogleImgId>"
   postsModel = new PostsModel();
 
-  constructor(private postsService: PostsService, private toastMessageService: ToastMessageService) { }
+  constructor(private postsService: PostsService, private toastMessageService: ToastMessageService) {
+    super();
+   }
 
   ngOnInit(): void {
     this.getPosts();
@@ -25,11 +28,12 @@ export class PostsComponent implements OnInit {
       pageSize: this.postsModel.pagination.rowsPerPage,
       page: this.postsModel.pagination.page
     }
-    this.postsService.getPosts(paginationData).subscribe((data: PostsRes) => {
+    const sub$ = this.postsService.getPosts(paginationData).subscribe((data: PostsRes) => {
       this.postsModel.posts = data.posts;
       this.updatingPaagination({ totalRec: data.maxPosts });
       this.postsModel.posts = this.postsModel.posts.map((post: fetchedPosts) => this.postConversion(post))
-    })
+    });
+    this.addsub(sub$);
   }
 
   addPost() {
@@ -66,10 +70,11 @@ export class PostsComponent implements OnInit {
   }
 
   onDeletePost(post) {
-    this.postsService.deletePost(post).subscribe((data: any) => {
+    const sub$ = this.postsService.deletePost(post).subscribe((data: any) => {
       this.toastMessageService.showSuccessToast([data.message]);
       this.postsModel.posts = this.postsModel.posts.filter(data => data._id !== post._id);
-    })
+    });
+    this.addsub(sub$);
   }
 
   onPageChange(event) {

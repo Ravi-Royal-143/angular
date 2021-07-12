@@ -97,6 +97,7 @@ export class PostComponent implements OnInit {
     }
     if (this.editData) {
       postData.append('_id', this.editData._id);
+      postData.append('oldPostId', this.editData.googleImgId);
     }
     return postData;
   }

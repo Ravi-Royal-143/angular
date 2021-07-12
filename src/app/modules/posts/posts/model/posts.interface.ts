@@ -9,8 +9,13 @@ export interface PostsRes {
 }
 
 export interface fetchedPosts {
-    imagePath: string;
     title: string;
     content: string;
     imgTitle: string;
+    creator: string;
+    googleImgId: string;
+    imageDownloadId: string;
+    imageTitle: string;
+    imageViewId: string;
+    img: string;
 }

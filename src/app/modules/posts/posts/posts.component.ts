@@ -10,6 +10,7 @@ import { PostsService } from './service/posts.service';
 })
 export class PostsComponent implements OnInit {
 
+  img = "https://drive.google.com/uc?export=view&id=<GoogleImgId>"
   postsModel = new PostsModel();
   constructor(private postsService: PostsService) { }
 
@@ -22,9 +23,7 @@ export class PostsComponent implements OnInit {
     this.postsService.getPosts().subscribe((data: PostsRes) => {
       this.postsModel.posts = data.posts;
       this.postsModel.posts.forEach((post: fetchedPosts) => {
-        let imgTitle = post.imagePath.split("/").pop().split("-");
-        imgTitle.pop();
-        post.imgTitle = imgTitle.join('-');
+        post.img = this.img.replace('<GoogleImgId>', post.googleImgId);
       })
     })
   }

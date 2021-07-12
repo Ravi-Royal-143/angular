@@ -50,7 +50,7 @@ export class LogInComponent extends AutoUnsubscribeComponent {
       return;
     }
     const sub$ = this.logInService.authenticate({ gmail, password }).subscribe(res => {
-      document.cookie = 'cookie' + '=' + res.cookie+ ';expires='+this.expTime().toUTCString()+ ';domain=.herokuapp.com'+';path=/'
+      document.cookie = 'cookie' + '=' + res.cookie+ ';expires='+this.expTime().toUTCString()+';path=/'
       this.navBarService.isLoggedIn.next(true);
       this.toastMessageService.showSuccessToast(['Sucessfully logged in.']);
       this.redirectionIfAny();

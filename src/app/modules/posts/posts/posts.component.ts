@@ -15,7 +15,6 @@ export class PostsComponent implements OnInit {
   constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
-    // this.postsModel.openDialog = true;
     this.getPosts();
   }
 

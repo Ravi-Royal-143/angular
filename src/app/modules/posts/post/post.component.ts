@@ -93,7 +93,7 @@ export class PostComponent implements OnInit {
     if (this.imgValueType) {
       postData.append("image", image);
     } else {
-      postData.append("image", image, title);
+      postData.append("image", image, image.name);
     }
     if (this.editData) {
       postData.append('_id', this.editData._id);

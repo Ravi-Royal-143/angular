@@ -57,7 +57,6 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
   scrollToBottom(): void {
     try {
       this.chatBox.nativeElement.scrollTop = this.chatBox.nativeElement.scrollHeight;
-      console.log(this.chatBox.nativeElement.scrollTop ,"=", this.chatBox.nativeElement.scrollHeight)
     } catch (err) { }
   }
 }

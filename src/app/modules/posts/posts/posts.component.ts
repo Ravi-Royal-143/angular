@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
 import { fetchedPosts, PaginationReq, PostsRes } from './model/posts.interface';
@@ -15,9 +16,13 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
   img = "https://drive.google.com/uc?export=view&id=<GoogleImgId>"
   postsModel = new PostsModel();
 
-  constructor(private postsService: PostsService, private toastMessageService: ToastMessageService) {
+  constructor(
+    private postsService: PostsService,
+    private toastMessageService: ToastMessageService,
+    private confirmationService: ConfirmationService
+  ) {
     super();
-   }
+  }
 
   ngOnInit(): void {
     this.getPosts();
@@ -92,6 +97,15 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
       ...this.postsModel.pagination,
       ...event
     }
+  }
+
+  confirmDelete(post) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete the post?',
+      accept: () => {
+        this.onDeletePost(post);
+      }
+    });
   }
 
 }

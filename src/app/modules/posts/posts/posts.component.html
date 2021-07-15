@@ -16,7 +16,7 @@
                         </span>
                         <span class="float-right">
                             <div class="pi pi-pencil text-primary p-px-2" (click)="onEditPost(post)"></div>
-                            <div class="pi pi-trash text-danger p-px-2" (click)="onDeletePost(post)"></div>
+                            <div class="pi pi-trash text-danger p-px-2" (click)="confirmDelete(post)"></div>
                         </span>
                     </div>
                 </div>
@@ -35,3 +35,5 @@
 
 <app-post *ngIf="postsModel.openDialog" (savedPost)="onSavePost($event)" [editData]="postsModel.editPostData">
 </app-post>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

@@ -4,6 +4,8 @@ import { PostsComponent } from './posts/posts.component';
 import { PostComponent } from './post/post.component';
 import { PostsRoutingModule } from './posts.routing.module';
 
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -27,7 +29,9 @@ import { PaginatorModule } from 'primeng/paginator';
     FileUploadModule,
     HttpClientModule,
     PaginatorModule,
-    InputTextareaModule
-  ]
+    InputTextareaModule,
+    ConfirmDialogModule
+  ],
+  providers: [ConfirmationService]
 })
 export class PostsModule { }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { WebsocketRes } from './model/interface';
 import { ChatService } from './service/chat.service';
@@ -8,12 +8,11 @@ import { ChatService } from './service/chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, OnDestroy {
+export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, OnDestroy, AfterContentChecked {
   @ViewChild('textRef', { static: false }) textRef: ElementRef;
-  @ViewChild('scrollMe', {static: false}) chatBox: TemplateRef<void>;
+  @ViewChild('scrollMe') chatBox: ElementRef;
 
   chat: string;
-  welcomeAndleftMsg: string[] = [];
   chats: ({ type: string } & WebsocketRes)[] = [];
 
   constructor(private chatService: ChatService) {
@@ -26,14 +25,15 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
       this.addToChat('recieved', data.content, data.sender);
     });
     const sub2$ = this.chatService.welcomeAndLeftMsg.subscribe((data: string) => {
-      this.welcomeAndleftMsg.push(data);
+      this.addToChat('pplDetail', data);
     });
     this.addsub(sub$, sub2$);
   }
 
-  ngAfterViewChecked() {
+  ngAfterContentChecked() {
     this.scrollToBottom();
   }
+
   ngOnDestroy() {
     this.chatService.disconnectSocket();
   }
@@ -45,22 +45,19 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
     this.chat = '';
   }
 
-  addToChat(type: 'recieved' | 'sent', content: string = '', sender: string = ' ANONYMOUS') {
+  addToChat(type: 'recieved' | 'sent' | 'pplDetail', content: string = '', sender: string = ' ANONYMOUS') {
     this.chats.push({
       type,
       content,
       sender
     });
-
+    this.scrollToBottom();
   }
 
   scrollToBottom(): void {
     try {
-
-      // console.log(this.chatBox.elementRef.nativeElement.scrollHeight)
-      this.chatBox.elementRef.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      // var objDiv = document.getElementsByClassName("p-card-content")[0];
-      // objDiv.scrollTop = objDiv.scrollHeight;
+      this.chatBox.nativeElement.scrollTop = this.chatBox.nativeElement.scrollHeight;
+      console.log(this.chatBox.nativeElement.scrollTop ,"=", this.chatBox.nativeElement.scrollHeight)
     } catch (err) { }
   }
 }

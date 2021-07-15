@@ -8,51 +8,23 @@
                 Chat Started
             </div>
 
-            <div class="chatBody" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-
-                <div class="p-text-center p-py-1">
-
-                    <div *ngFor="let data of welcomeAndleftMsg">
-                        <div>
-                            {{data}}
-                        </div>
-                    </div>
-
-                </div>
+            <div class="chatBody" #scrollMe>
 
                 <div *ngFor="let chat of chats">
-                    <div *ngIf="chat.type == 'recieved'; then thenBlock else elseBlock"></div>
-                    <ng-template #thenBlock>
-                        <div class="p-col-12">
-                            <div class="p-fluid p-grid p-mr-5">
-                                <div class="p-col-12 chat-border">
-                                    <span class="royal-ft-wt-700">{{chat.sender}}: </span>
-                                    {{chat.content}}
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template #elseBlock>
-                        <div class="p-col-12">
-                            <div class="p-fluid p-grid  p-ml-5">
-                                <div class="p-col-12 chat-border  p-text-right">
-                                    <span class="royal-ft-wt-700">YOU: </span>
-                                    {{chat.content}}
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-
+                    <ng-container [ngTemplateOutlet]="chat.type == 'pplDetail'? pplBlock : chatBlock"
+                        [ngTemplateOutletContext]="{chat:chat}"></ng-container>
                 </div>
 
             </div>
 
             <div class="p-grid">
+
                 <div class="p-col p-pr-0">
                     <div class="box">
                         <input class="w-100" #textRef #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
                     </div>
                 </div>
+
                 <div class="p-col-fixed p-pl-0" style="width:80px">
                     <div class="box">
                         <p-button icon="pi pi-send" styleClass="icon-button" [disabled]="!chatref.value"
@@ -60,6 +32,7 @@
                         </p-button>
                     </div>
                 </div>
+                
             </div>
 
         </div>
@@ -67,3 +40,36 @@
     </div>
 
 </div>
+
+<ng-template #pplBlock let-chat="chat">
+    <div class="p-text-center p-py-1">
+        {{chat.content}}
+    </div>
+</ng-template>
+
+<ng-template #chatBlock let-chat="chat">
+    <ng-container [ngTemplateOutlet]="chat.type == 'recieved' ? thenBlock : elseBlock"
+        [ngTemplateOutletContext]="{chat:chat}"></ng-container>
+</ng-template>
+
+<ng-template #thenBlock let-chat="chat">
+    <div class="p-col-12">
+        <div class="p-fluid p-grid p-mr-5">
+            <div class="p-col-12 chat-border">
+                <span class="royal-ft-wt-700">{{chat.sender}}: </span>
+                {{chat.content}}
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #elseBlock let-chat="chat">
+    <div class="p-col-12">
+        <div class="p-fluid p-grid  p-ml-5">
+            <div class="p-col-12 chat-border  p-text-right">
+                <span class="royal-ft-wt-700">YOU: </span>
+                {{chat.content}}
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { WebsocketRes } from './model/interface';
 import { ChatService } from './service/chat.service';
@@ -10,6 +10,7 @@ import { ChatService } from './service/chat.service';
 })
 export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, OnDestroy {
   @ViewChild('textRef', { static: false }) textRef: ElementRef;
+  @ViewChild('scrollMe', {static: false}) chatBox: TemplateRef<void>;
 
   chat: string;
   welcomeAndleftMsg: string[] = [];
@@ -30,6 +31,9 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
     this.addsub(sub$, sub2$);
   }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
   ngOnDestroy() {
     this.chatService.disconnectSocket();
   }
@@ -47,5 +51,16 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
       content,
       sender
     });
+
+  }
+
+  scrollToBottom(): void {
+    try {
+
+      // console.log(this.chatBox.elementRef.nativeElement.scrollHeight)
+      this.chatBox.elementRef.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      // var objDiv = document.getElementsByClassName("p-card-content")[0];
+      // objDiv.scrollTop = objDiv.scrollHeight;
+    } catch (err) { }
   }
 }

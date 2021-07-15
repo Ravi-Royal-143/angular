@@ -1,42 +1,52 @@
 <div class="p-p-4">
 
-    <p-card header="Chat Started" styleClass="chatBody">
+    <div class="p-card">
 
-        <div class="p-text-center">
+        <div class="p-card-body">
 
-            <div *ngFor="let data of welcomeAndleftMsg">
-                <div>
-                    {{data}}
-                </div>
+            <div class="p-card-title">
+                Chat Started
             </div>
 
-        </div>
+            <div class="chatBody" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 
-        <div *ngFor="let chat of chats">
-            <div *ngIf="chat.type == 'recieved'; then thenBlock else elseBlock"></div>
-            <ng-template #thenBlock>
-                <div class="p-col-12">
-                    <div class="p-fluid p-grid p-mr-5">
-                        <div class="p-col-12 chat-border">
-                            <span class="royal-ft-wt-700">{{chat.sender}}: </span>
-                            {{chat.content}}
+                <div class="p-text-center p-py-1">
+
+                    <div *ngFor="let data of welcomeAndleftMsg">
+                        <div>
+                            {{data}}
                         </div>
                     </div>
-                </div>
-            </ng-template>
-            <ng-template #elseBlock>
-                <div class="p-col-12">
-                    <div class="p-fluid p-grid  p-ml-5">
-                        <div class="p-col-12 chat-border  p-text-right">
-                            <span class="royal-ft-wt-700">YOU: </span>
-                            {{chat.content}}
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
 
-        </div>
-        <ng-template pTemplate="footer">
+                </div>
+
+                <div *ngFor="let chat of chats">
+                    <div *ngIf="chat.type == 'recieved'; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <div class="p-col-12">
+                            <div class="p-fluid p-grid p-mr-5">
+                                <div class="p-col-12 chat-border">
+                                    <span class="royal-ft-wt-700">{{chat.sender}}: </span>
+                                    {{chat.content}}
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <div class="p-col-12">
+                            <div class="p-fluid p-grid  p-ml-5">
+                                <div class="p-col-12 chat-border  p-text-right">
+                                    <span class="royal-ft-wt-700">YOU: </span>
+                                    {{chat.content}}
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </div>
+
+            </div>
+
             <div class="p-grid">
                 <div class="p-col p-pr-0">
                     <div class="box">
@@ -51,9 +61,9 @@
                     </div>
                 </div>
             </div>
-        </ng-template>
 
+        </div>
 
-    </p-card>
+    </div>
 
 </div>

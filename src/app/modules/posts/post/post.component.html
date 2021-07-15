@@ -1,5 +1,6 @@
-<p-dialog header="Add Post" [(visible)]="postModel.displayPopUp" [style]="{width: '75vw'}" [baseZIndex]="1001"
+<p-dialog [(visible)]="postModel.displayPopUp" [style]="{width: '75vw'}" [baseZIndex]="1001"
     (onHide)="onClickClose()">
+    <p-header> {{ editData ? 'Edit Post' : 'Add Post' }} </p-header>
     <div class="centerOfScreen" [formGroup]="postModel.postform">
         <div class="p-col-12">
             <div class="p-col-12">

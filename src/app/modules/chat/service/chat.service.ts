@@ -10,8 +10,7 @@ import { WebsocketRes } from '../model/interface';
 export class ChatService {
   socket;
   latestChat = new Subject();
-  myMessage = new Subject();
-  leftMessage = new Subject<string>();
+  welcomeAndLeftMsg = new Subject<string>();
 
   constructor() { }
 
@@ -21,10 +20,10 @@ export class ChatService {
       this.latestChat.next(data);
     });
     this.socket.on('message', (data: WebsocketRes) => {
-      this.myMessage.next(data);
+      this.welcomeAndLeftMsg.next(data.content);
     });
     this.socket.on('disconnected', (data: WebsocketRes) => {
-      this.leftMessage.next(data.content);
+      this.welcomeAndLeftMsg.next(data.content);
     });
   }
 

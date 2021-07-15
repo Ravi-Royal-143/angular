@@ -3,10 +3,8 @@
     <p-card header="Chat Started" styleClass="chatBody">
 
         <div class="p-text-center">
-            
-            <div> {{welcomeMsg}} </div>
 
-            <div *ngFor="let data of leftMsg">
+            <div *ngFor="let data of welcomeAndleftMsg">
                 <div>
                     {{data}}
                 </div>

@@ -9,28 +9,28 @@
     <div class="collapse navbar-collapse p-ml-2" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <!-- <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['user-details', 'flames']">Home</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" [routerLink]="['user-details', 'flames']">Home</a>
         </li> -->
         <li class="nav-item" [routerLinkActive]="['active']">
-          <a class="nav-link" [routerLink]="['user-details', 'chat']">Chat</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" [routerLink]="['user-details', 'chat']">Chat</a>
         </li>
         <li class="nav-item" [routerLinkActive]="['active']">
-          <a class="nav-link" [routerLink]="['user-details', 'flames']">Flames</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" [routerLink]="['user-details', 'flames']">Flames</a>
         </li>
         <li class="nav-item" [routerLinkActive]="['active']">
-          <a class="nav-link" [routerLink]="['posts']">Posts</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" [routerLink]="['posts']">Posts</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item" [routerLinkActive]="['active']">
-          <a class="nav-link" *ngIf="!isLoggedIn" [routerLink]="['auth', 'sign-up']"  queryParamsHandling="preserve"> Sign Up <span
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" *ngIf="!isLoggedIn" [routerLink]="['auth', 'sign-up']"  queryParamsHandling="preserve"> Sign Up <span
               class="pi pi-user"></span></a>
         </li>
         <li class="nav-item" [routerLinkActive]="['active']" *ngIf="!isLoggedIn">
-          <a class="nav-link" [routerLink]="['auth', 'log-in']"  queryParamsHandling="preserve"> Login <span class="pi pi-sign-in"></span></a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" [routerLink]="['auth', 'log-in']"  queryParamsHandling="preserve"> Login <span class="pi pi-sign-in"></span></a>
         </li>
         <li class="nav-item" [routerLinkActive]="['active']" *ngIf="isLoggedIn" (click)="logOut()">
-          <a class="nav-link"> Log Out <span class="pi pi-sign-out"></span></a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show"> Log Out <span class="pi pi-sign-out"></span></a>
         </li>
       </ul>
     </div>

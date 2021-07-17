@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { defaultToast } from './defaultToastValues';
+import { ToastMessageService } from './toast-message.service';
 
 @Component({
   selector: 'app-toast-message',
@@ -10,9 +11,13 @@ export class ToastMessageComponent implements OnInit {
 
   @Input() key: string = defaultToast.key;
 
-  constructor() { }
+  constructor(private readonly toastMessageService: ToastMessageService) { }
 
   ngOnInit(): void {
+  }
+
+  onmsgClose(event) {
+    this.toastMessageService.removeMesInMessageDispalyed(event.message);
   }
 
 }

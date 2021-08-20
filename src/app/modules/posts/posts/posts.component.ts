@@ -51,7 +51,9 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
     if (updatedPost.isSaved) {
       let index = this.postsModel.posts.findIndex(post => post._id === updatedPost.post._id);
       if (index === -1) {
-        this.postsModel.posts.push(this.postConversion(updatedPost.post));
+        this.postsModel.pagination.page = 1;
+        // this.postsModel.posts.push(this.postConversion(updatedPost.post));
+        this.getPosts();
       } else {
         let updatedVal = {
           ...this.postsModel.posts[index],

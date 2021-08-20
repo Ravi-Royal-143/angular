@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <p-paginator (onPageChange)="onPageChange($event)" [rows]="postsModel.pagination.rowsPerPage"
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="postsModel.pagination.page" [rows]="postsModel.pagination.rowsPerPage"
         [totalRecords]="postsModel.pagination.totalRec" [rowsPerPageOptions]="[2,5,10,20,30]"></p-paginator>
 </div>
 

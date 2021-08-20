@@ -24,7 +24,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
         // err = new ServiceError(err);
         // showToast
         }
-        let message = err.error;
+        let message = err.error.message || err.error;
         if (!Array.isArray(message)) {
           message = [message];
         }

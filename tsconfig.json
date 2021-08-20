@@ -19,6 +19,9 @@
     "paths": {
       "@modules/*": [
         "src/app/modules/*"
+      ],
+      "@store/*": [
+        "src/app/store/*"
       ]
     }
   }

@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavBarService } from '@modules/nav-bar/service/nav-bar.service';
+import { Store } from '@ngrx/store';
+
 import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
+import { State } from 'src/app/store/reducers';
 import { LogInService } from './service/log-in.service';
+import * as loginActions from '@store/actions/log-in.action';
 
 @Component({
   selector: 'app-log-in',
@@ -38,20 +41,21 @@ export class LogInComponent extends AutoUnsubscribeComponent {
     private router: Router,
     private route: ActivatedRoute,
     private toastMessageService: ToastMessageService,
-    private navBarService: NavBarService
+    private readonly store: Store<State>
   ) {
     super();
-   }
+  }
 
   onSubmit(): void | undefined {
     this.checkOnSubmit();
     const { gmail, password } = this.userInfo.value;
+
     if (this.userInfo.invalid) {
       return;
     }
     const sub$ = this.logInService.authenticate({ gmail, password }).subscribe(res => {
-      document.cookie = 'cookie' + '=' + res.cookie+ ';expires='+this.expTime().toUTCString()+';path=/'
-      this.navBarService.isLoggedIn.next(true);
+      document.cookie = 'cookie' + '=' + res.cookie + ';expires=' + this.expTime().toUTCString() + ';path=/'
+      this.store.dispatch(loginActions.login({ loggedIn: true }));
       this.toastMessageService.showSuccessToast(['Sucessfully logged in.']);
       this.redirectionIfAny();
     });

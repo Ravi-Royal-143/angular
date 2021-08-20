@@ -9,7 +9,7 @@ export class PostsModel {
     constructor() {
         this.pagination = {
             page: 1,
-            totalRec: 15,
+            totalRec: 0,
             rowsPerPage: 5
         }
     }

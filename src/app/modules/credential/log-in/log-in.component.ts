@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -8,6 +8,7 @@ import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.
 import { State } from 'src/app/store/reducers';
 import { LogInService } from './service/log-in.service';
 import * as loginActions from '@store/actions/log-in.action';
+import { ResponseMes } from './model/log-in.interface';
 
 @Component({
   selector: 'app-log-in',
@@ -17,6 +18,10 @@ import * as loginActions from '@store/actions/log-in.action';
 export class LogInComponent extends AutoUnsubscribeComponent {
   isgmailValidate: boolean;
   ispasswordValidate: boolean;
+  isforgetGmailValidate: boolean;
+  isPasswordForgot: boolean;
+  forgotGmail = new FormControl('wijiro3962@drlatvia.com', [Validators.required, Validators.email]);
+
   userInfo: FormGroup = this.fb.group({
     gmail: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
@@ -33,7 +38,6 @@ export class LogInComponent extends AutoUnsubscribeComponent {
   get passwordFormDetails(): AbstractControl {
     return this.formDetails.password;
   }
-
 
   constructor(
     private fb: FormBuilder,
@@ -91,6 +95,25 @@ export class LogInComponent extends AutoUnsubscribeComponent {
   checkOnSubmit(): void {
     this.isgmailValidate = true;
     this.ispasswordValidate = true;
+  }
+
+  closeForgotPass() {
+    this.isforgetGmailValidate = false;
+  }
+
+  onResetPass() {
+    this.checkonResetPass();
+    if (this.forgotGmail.invalid) {
+      return;
+    }
+    this.logInService.resetPass(this.forgotGmail.value).subscribe((res: ResponseMes) => {
+      this.toastMessageService.showSuccessToast([res.message]);
+      // this.router.navigate(['../', 'reset', res.token], { relativeTo: this.route, queryParamsHandling: 'preserve' });
+    });
+  }
+
+  checkonResetPass() {
+    this.isforgetGmailValidate = true;
   }
 
 }

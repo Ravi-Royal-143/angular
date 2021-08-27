@@ -7,7 +7,9 @@ const nodeEndPoints = {
     signUp: 'auth/sign-up',
     crush: 'crush',
     post: 'post',
-    deletePost: 'post/<id>'
+    deletePost: 'post/<id>',
+    resetPass: 'resetPass/<ResetMail>',
+    resetPassEnd: 'resetPass/<ResetMail>/<ResetToken>'
 };
 
 

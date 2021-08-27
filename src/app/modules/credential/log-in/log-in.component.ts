@@ -98,6 +98,7 @@ export class LogInComponent extends AutoUnsubscribeComponent {
   }
 
   closeForgotPass() {
+    this.isPasswordForgot = false;
     this.isforgetGmailValidate = false;
     this.forgotGmail.reset();
   }

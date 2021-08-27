@@ -99,6 +99,7 @@ export class LogInComponent extends AutoUnsubscribeComponent {
 
   closeForgotPass() {
     this.isforgetGmailValidate = false;
+    this.forgotGmail.reset();
   }
 
   onResetPass() {
@@ -108,7 +109,7 @@ export class LogInComponent extends AutoUnsubscribeComponent {
     }
     this.logInService.resetPass(this.forgotGmail.value).subscribe((res: ResponseMes) => {
       this.toastMessageService.showSuccessToast([res.message]);
-      // this.router.navigate(['../', 'reset', res.token], { relativeTo: this.route, queryParamsHandling: 'preserve' });
+      this.closeForgotPass();
     });
   }
 

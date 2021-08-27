@@ -65,7 +65,7 @@ export class ForgetPasswordComponent implements OnInit {
 
     this.forgetPasswordService.resetPass(this.gmail, this.token, this.passwordFormDetails.value).subscribe((res: ResponseMes) => {
       this.toastMessageService.showSuccessToast([res.message]);
-      this.router.navigate(['../', 'log-in'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
+      this.router.navigate(['../../../', 'log-in'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
     });
   }
 

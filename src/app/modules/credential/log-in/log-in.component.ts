@@ -20,7 +20,7 @@ export class LogInComponent extends AutoUnsubscribeComponent {
   ispasswordValidate: boolean;
   isforgetGmailValidate: boolean;
   isPasswordForgot: boolean;
-  forgotGmail = new FormControl('wijiro3962@drlatvia.com', [Validators.required, Validators.email]);
+  forgotGmail = new FormControl('', [Validators.required, Validators.email]);
 
   userInfo: FormGroup = this.fb.group({
     gmail: ['', [Validators.required, Validators.email]],

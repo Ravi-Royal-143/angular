@@ -31,7 +31,7 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
   getPosts() {
     let paginationData: PaginationReq = {
       pageSize: this.postsModel.pagination.rowsPerPage,
-      page: this.postsModel.pagination.page
+      page: this.postsModel.reqPage
     }
     const sub$ = this.postsService.getPosts(paginationData).subscribe((data: PostsRes) => {
       this.postsModel.posts = data.posts;
@@ -51,7 +51,7 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
     if (updatedPost.isSaved) {
       let index = this.postsModel.posts.findIndex(post => post._id === updatedPost.post._id);
       if (index === -1) {
-        this.postsModel.pagination.page = 1;
+        this.postsModel.reqPage = 1;
         // this.postsModel.posts.push(this.postConversion(updatedPost.post));
         this.getPosts();
       } else {
@@ -87,9 +87,9 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
   onPageChange(event) {
     console.log(event)
     let reqData = {
-      rowsPerPage: event.rows,
-      page: event.page + 1
+      rowsPerPage: event.rows
     };
+    this.postsModel.reqPage = event.page + 1
     this.updatingPaagination(reqData);
     this.getPosts();
   }

@@ -5,6 +5,7 @@ export class PostsModel {
     posts = [];
     editPostData;
     pagination: Pagination;
+    reqPage: number;
 
     constructor() {
         this.pagination = {
@@ -12,5 +13,7 @@ export class PostsModel {
             totalRec: 0,
             rowsPerPage: 5
         }
+
+        this.reqPage = this.pagination.page;
     }
 }

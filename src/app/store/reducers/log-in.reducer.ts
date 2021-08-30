@@ -15,10 +15,16 @@ export const initialState: UserDetails = {
     loggedIn: !!document.cookie
 };
 
+export const defaultState: UserDetails = {
+    userName: '',
+    token: '',
+    loggedIn: false
+};
+
 const logInReducer = createReducer(
     initialState,
     on(loginActions.login, (state, payload) => ({ ...state, ...payload })),
-    on(loginActions.logOut, _ => ({ ...initialState })),
+    on(loginActions.logOut, _ => ({ ...defaultState })),
 );
 
 export function reducer(state: UserDetails | undefined, action: Action) {

@@ -29,6 +29,10 @@ const routes: Routes = [
     loadChildren: () => import('@modules/credential/credential.module').then(m => m.CredentialModule)
   },
   {
+    path: 'news',
+    loadChildren: () => import('@modules/news/news.module').then(m => m.NewsModule)
+  },
+  {
     path: '',
     redirectTo: 'user-details',
     pathMatch: 'full'

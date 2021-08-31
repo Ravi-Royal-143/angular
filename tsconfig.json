@@ -20,6 +20,9 @@
       "@modules/*": [
         "src/app/modules/*"
       ],
+      "@assets/*": [
+        "src/app/assets/*"
+      ],
       "@store/*": [
         "src/app/store/*"
       ]

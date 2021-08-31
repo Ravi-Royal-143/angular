@@ -9,7 +9,8 @@ const nodeEndPoints = {
     post: 'post',
     deletePost: 'post/<id>',
     resetPass: 'resetPass/<ResetMail>',
-    resetPassEnd: 'resetPass/<ResetMail>/<ResetToken>'
+    resetPassEnd: 'resetPass/<ResetMail>/<ResetToken>',
+    news: 'news/latest'
 };
 
 

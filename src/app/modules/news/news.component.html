@@ -5,8 +5,6 @@
             <ng-template pTemplate="header">
                 <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
                     <p-dropdown [(ngModel)]="selectedCountry" (onChange)="onChangeCountry($event)" [options]="countryList" placeholder="Select Country" styleClass="p-mb-2 p-mb-md-0" optionLabel="key"></p-dropdown>
-                    <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" -->
-                    <!-- (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown> -->
                     <span class="p-input-icon-left p-mb-2 p-mb-md-0">
                         NEWS
                     </span>

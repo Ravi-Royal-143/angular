@@ -9,7 +9,7 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
-  getNews(newsCountry: string = "us") {
+  getNews(newsCountry: string = 'us') {
     let params = new HttpParams();
     params = params.append('country', newsCountry);
     return this.http.get(mynodeEndPoint.news, { params });

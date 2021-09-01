@@ -1,4 +1,4 @@
-import { Pagination } from "./posts.interface";
+import { Pagination } from './posts.interface';
 
 export class PostsModel {
     openDialog: boolean;
@@ -12,7 +12,7 @@ export class PostsModel {
             page: 1,
             totalRec: 0,
             rowsPerPage: 5
-        }
+        };
 
         this.reqPage = this.pagination.page;
     }

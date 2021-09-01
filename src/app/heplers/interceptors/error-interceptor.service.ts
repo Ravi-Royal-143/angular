@@ -17,7 +17,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
       catchError(err => {
         const error = err;
         const statusCode = err.status;
-        if([401, 403].indexOf(statusCode) !== -1) {
+        if ([401, 403].indexOf(statusCode) !== -1) {
           this.toastMessageService.showErrorToast(['Please Log in to continue']);
           this.router.navigate(['auth', 'log-in']);
         // } else {

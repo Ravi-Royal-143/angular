@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
 import { WebsocketRes } from './model/interface';
 import { ChatService } from './service/chat.service';
@@ -19,7 +19,7 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.chatService.setupSocketConnection();
     const sub$ = this.chatService.latestChat.subscribe((data: WebsocketRes) => {
       this.addToChat('recieved', data.content, data.sender);
@@ -30,22 +30,22 @@ export class ChatComponent extends AutoUnsubscribeComponent implements OnInit, O
     this.addsub(sub$, sub2$);
   }
 
-  ngAfterContentChecked() {
+  ngAfterContentChecked(): void {
     this.scrollToBottom();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.chatService.disconnectSocket();
   }
 
-  onSend() {
+  onSend(): void {
     this.chatService.SendMessage(this.chat);
     this.addToChat('sent', this.chat, 'YOU');
     this.textRef.nativeElement.focus();
     this.chat = '';
   }
 
-  addToChat(type: 'recieved' | 'sent' | 'pplDetail', content: string = '', sender: string = ' ANONYMOUS') {
+  addToChat(type: 'recieved' | 'sent' | 'pplDetail', content: string = '', sender: string = ' ANONYMOUS'): void {
     this.chats.push({
       type,
       content,

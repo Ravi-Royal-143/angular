@@ -15,6 +15,6 @@ export class HttpCookieInterceptorService implements HttpInterceptor {
         headers: req.headers.set('Authorization', document.cookie)
       });
     // }
-    return next.handle(req);
+      return next.handle(req);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { io } from 'socket.io-client';
 import { myurlnodeUrl } from 'src/app/urls/url';
 import { WebsocketRes } from '../model/interface';
@@ -14,7 +14,7 @@ export class ChatService {
 
   constructor() { }
 
-  setupSocketConnection() {
+  setupSocketConnection(): void {
     this.socket = io(myurlnodeUrl, { transports: ['websocket', 'polling', 'flashsocket'] });
     this.socket.on('message-broadcast', (data: WebsocketRes) => {
       this.latestChat.next(data);
@@ -27,11 +27,11 @@ export class ChatService {
     });
   }
 
-  SendMessage(message) {
+  SendMessage(message): void {
     this.socket.emit('message', message);
   }
 
-  disconnectSocket() {
+  disconnectSocket(): void {
     this.socket.disconnect();
   }
 

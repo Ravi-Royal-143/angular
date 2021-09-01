@@ -47,12 +47,12 @@ export class NavBarComponent extends AutoUnsubscribeComponent implements OnInit 
     }
     this.store.dispatch(loginActions.logOut());
     this.toastMessageService.showSuccessToast(['Sucessfully logged out.']);
-    
+
     this.redirectTo(this.router.url);
   }
 
-  redirectTo(uri:string){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+  redirectTo(uri: string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
     this.router.navigate([uri]));
  }
 

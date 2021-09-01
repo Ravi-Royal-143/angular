@@ -12,7 +12,7 @@ export class NewsComponent extends AutoUnsubscribeComponent implements OnInit {
 
   newses: Article[];
   countryList: KeyVal[];
-  defaultNewsCountry = "us";
+  defaultNewsCountry = 'us';
   selectedCountry;
 
   constructor(private newsService: NewsService) {
@@ -25,7 +25,7 @@ export class NewsComponent extends AutoUnsubscribeComponent implements OnInit {
         return {
           key: data.country,
           value: data.countryKey
-        }
+        };
       });
       this.selectedCountry = this.countryList.find(data => data.value == this.defaultNewsCountry);
       this.getNews(this.selectedCountry.value);
@@ -37,7 +37,7 @@ export class NewsComponent extends AutoUnsubscribeComponent implements OnInit {
     this.getNews(data.value.value);
   }
 
-  getNews(newsCountry: string = "us") {
+  getNews(newsCountry: string = 'us') {
     const sub$ = this.newsService.getNews(newsCountry).subscribe((res: NewsApiRes) => {
       this.newses = res.articles;
     });

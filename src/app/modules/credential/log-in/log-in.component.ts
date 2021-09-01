@@ -58,7 +58,7 @@ export class LogInComponent extends AutoUnsubscribeComponent {
       return;
     }
     const sub$ = this.logInService.authenticate({ gmail, password }).subscribe(res => {
-      document.cookie = 'cookie' + '=' + res.cookie + ';expires=' + this.expTime().toUTCString() + ';path=/'
+      document.cookie = 'cookie' + '=' + res.cookie + ';expires=' + this.expTime().toUTCString() + ';path=/';
       this.store.dispatch(loginActions.login({ loggedIn: true }));
       this.toastMessageService.showSuccessToast(['Sucessfully logged in.']);
       this.redirectionIfAny();
@@ -67,24 +67,24 @@ export class LogInComponent extends AutoUnsubscribeComponent {
   }
 
   expTime() {
-    var now = new Date();
-    var time = now.getTime();
-    var expireTime = time + 1000 * 36000;
+    const now = new Date();
+    const time = now.getTime();
+    const expireTime = time + 1000 * 36000;
     now.setTime(expireTime);
     return now;
   }
 
-  redirectionIfAny() {
+  redirectionIfAny(): void {
     let redirectURL = '/';
-    let params = this.route.snapshot.queryParams;
-    if (params['redirectURL']) {
-      redirectURL = params['redirectURL'];
+    const params = this.route.snapshot.queryParams;
+    if (params.redirectURL) {
+      redirectURL = params.redirectURL;
     }
     if (redirectURL) {
       this.router.navigateByUrl(redirectURL)
-        .catch(() => this.router.navigate(['/']))
+        .catch(() => this.router.navigate(['/']));
     } else {
-      this.router.navigate(['/'])
+      this.router.navigate(['/']);
     }
   }
 
@@ -97,13 +97,13 @@ export class LogInComponent extends AutoUnsubscribeComponent {
     this.ispasswordValidate = true;
   }
 
-  closeForgotPass() {
+  closeForgotPass(): void {
     this.isPasswordForgot = false;
     this.isforgetGmailValidate = false;
     this.forgotGmail.reset();
   }
 
-  onResetPass() {
+  onResetPass(): void | undefined {
     this.checkonResetPass();
     if (this.forgotGmail.invalid) {
       return;
@@ -115,7 +115,7 @@ export class LogInComponent extends AutoUnsubscribeComponent {
     this.addsub(sub$);
   }
 
-  checkonResetPass() {
+  checkonResetPass(): void {
     this.isforgetGmailValidate = true;
   }
 

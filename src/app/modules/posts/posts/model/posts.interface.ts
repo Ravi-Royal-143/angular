@@ -4,7 +4,7 @@ export class PostsModel {
 
 export interface PostsRes {
     message: string;
-    posts: fetchedPosts[],
+    posts: fetchedPosts[];
     maxPosts: number;
 }
 

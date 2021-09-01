@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
 import { FlamesReq } from './model/flames.interface';
@@ -21,15 +21,15 @@ export class FlamesComponent extends AutoUnsubscribeComponent {
     super();
    }
 
-  get formDetails() {
+  get formDetails(): { [key: string]: AbstractControl } {
     return this.flamesModel.userData.controls;
   }
 
-  get yourNameDetails() {
+  get yourNameDetails(): AbstractControl {
     return this.formDetails.yourName;
   }
 
-  get crushNameFormDetails() {
+  get crushNameFormDetails(): AbstractControl {
     return this.formDetails.crushName;
   }
 

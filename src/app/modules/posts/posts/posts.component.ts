@@ -13,7 +13,7 @@ import { PostsService } from './service/posts.service';
 })
 export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
 
-  img = "https://drive.google.com/uc?export=view&id=<GoogleImgId>"
+  img = 'https://drive.google.com/uc?export=view&id=<GoogleImgId>';
   postsModel = new PostsModel();
 
   constructor(
@@ -29,14 +29,14 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
   }
 
   getPosts() {
-    let paginationData: PaginationReq = {
+    const paginationData: PaginationReq = {
       pageSize: this.postsModel.pagination.rowsPerPage,
       page: this.postsModel.reqPage
-    }
+    };
     const sub$ = this.postsService.getPosts(paginationData).subscribe((data: PostsRes) => {
       this.postsModel.posts = data.posts;
       this.updatingPaagination({ totalRec: data.maxPosts });
-      this.postsModel.posts = this.postsModel.posts.map((post: fetchedPosts) => this.postConversion(post))
+      this.postsModel.posts = this.postsModel.posts.map((post: fetchedPosts) => this.postConversion(post));
     });
     this.addsub(sub$);
   }
@@ -49,16 +49,16 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
     this.postsModel.openDialog = false;
     this.postsModel.editPostData = null;
     if (updatedPost.isSaved) {
-      let index = this.postsModel.posts.findIndex(post => post._id === updatedPost.post._id);
+      const index = this.postsModel.posts.findIndex(post => post._id === updatedPost.post._id);
       if (index === -1) {
         this.postsModel.reqPage = 1;
         // this.postsModel.posts.push(this.postConversion(updatedPost.post));
         this.getPosts();
       } else {
-        let updatedVal = {
+        const updatedVal = {
           ...this.postsModel.posts[index],
           ...updatedPost.post
-        }
+        };
         this.postsModel.posts[index] = this.postConversion(updatedVal);
       }
     }
@@ -68,7 +68,7 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
     return {
       ...post,
       img: this.img.replace('<GoogleImgId>', post.googleImgId)
-    }
+    };
   }
 
   onEditPost(data) {
@@ -85,11 +85,11 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
   }
 
   onPageChange(event) {
-    console.log(event)
-    let reqData = {
+    console.log(event);
+    const reqData = {
       rowsPerPage: event.rows
     };
-    this.postsModel.reqPage = event.page + 1
+    this.postsModel.reqPage = event.page + 1;
     this.updatingPaagination(reqData);
     this.getPosts();
   }
@@ -98,7 +98,7 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
     this.postsModel.pagination = {
       ...this.postsModel.pagination,
       ...event
-    }
+    };
   }
 
   confirmDelete(post) {

@@ -26,7 +26,7 @@ export class PostComponent extends AutoUnsubscribeComponent implements OnInit {
   constructor(
     private toastMessageService: ToastMessageService,
     private postService: PostService
-  ) { 
+  ) {
     super();
   }
 
@@ -69,7 +69,7 @@ export class PostComponent extends AutoUnsubscribeComponent implements OnInit {
   }
 
   get imgValueType() {
-    return typeof (this.postModel.postform.value.image) == 'string'
+    return typeof (this.postModel.postform.value.image) == 'string';
   }
 
   onSubmit() {
@@ -86,7 +86,7 @@ export class PostComponent extends AutoUnsubscribeComponent implements OnInit {
   savePost() {
     const postData = this.addFormData();
     const sub$ = this.postService.savePost(postData, !!this.editData).subscribe((res) => {
-      this.toastMessageService.showSuccessToast([res.message])
+      this.toastMessageService.showSuccessToast([res.message]);
       this.onClosing();
       this.savedPost.emit({
         isSaved: true,
@@ -100,12 +100,12 @@ export class PostComponent extends AutoUnsubscribeComponent implements OnInit {
   addFormData() {
     const { title, content, image } = this.postModel.postform.value;
     const postData = new FormData();
-    postData.append("title", title);
-    postData.append("content", content);
+    postData.append('title', title);
+    postData.append('content', content);
     if (this.imgValueType) {
-      postData.append("image", image);
+      postData.append('image', image);
     } else {
-      postData.append("image", image, image.name);
+      postData.append('image', image, image.name);
     }
     if (this.editData) {
       postData.append('_id', this.editData._id);
@@ -121,7 +121,7 @@ export class PostComponent extends AutoUnsubscribeComponent implements OnInit {
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.postModel.postform.patchValue({ image: file });
-    this.postModel.postform.get("image").updateValueAndValidity();
+    this.postModel.postform.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result as string;

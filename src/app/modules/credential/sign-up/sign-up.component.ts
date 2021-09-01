@@ -29,7 +29,7 @@ export class SignUpComponent extends AutoUnsubscribeComponent {
     private router: Router,
     private route: ActivatedRoute,
     private toastMessageService: ToastMessageService
-  ) { 
+  ) {
     super();
   }
 

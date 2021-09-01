@@ -42,11 +42,11 @@ export class ForgetPasswordComponent extends AutoUnsubscribeComponent implements
     private fb: FormBuilder,
     private router: Router,
     private forgetPasswordService: ForgetPasswordService
-  ) { 
+  ) {
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const sub$ = this.route.params.subscribe((params: Params) => {
       this.gmail = params.gmail;
       this.token = params.token;
@@ -58,7 +58,7 @@ export class ForgetPasswordComponent extends AutoUnsubscribeComponent implements
     this[validateField] = true;
   }
 
-  onSubmit() {
+  onSubmit(): void| undefined  {
     this.checkOnSubmit();
     const { password, repassword } = this.resettingPass.value;
     let isFieldInvalid = false;
@@ -67,14 +67,15 @@ export class ForgetPasswordComponent extends AutoUnsubscribeComponent implements
       return;
     }
 
-    const sub$ = this.forgetPasswordService.resetPass(this.gmail, this.token, this.passwordFormDetails.value).subscribe((res: ResponseMes) => {
-      this.toastMessageService.showSuccessToast([res.message]);
-      this.router.navigate(['../../../', 'log-in'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
-    });
+    const sub$ = this.forgetPasswordService.resetPass(this.gmail, this.token,
+      this.passwordFormDetails.value).subscribe((res: ResponseMes) => {
+        this.toastMessageService.showSuccessToast([res.message]);
+        this.router.navigate(['../../../', 'log-in'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
+      });
     this.addsub(sub$);
   }
 
-  checkOnSubmit() {
+  checkOnSubmit(): void {
     this.ispasswordValidate = true;
     this.isrepasswordValidate = true;
   }

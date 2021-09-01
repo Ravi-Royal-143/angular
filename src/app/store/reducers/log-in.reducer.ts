@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from "@ngrx/store";
+import { Action, createReducer, on } from '@ngrx/store';
 import * as loginActions from '../actions/log-in.action';
 
 export const logInFeatureKey = 'logIn';

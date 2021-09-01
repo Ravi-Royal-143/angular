@@ -78,7 +78,7 @@ export class ToastMessageService {
     );
 
     if (toasts.length > 0) {
-      this.messageDispalyed.push(...toasts)
+      this.messageDispalyed.push(...toasts);
       this.messageService.addAll(toasts);
     }
   }

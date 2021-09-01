@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 export const login = createAction(
   '[Login Page] Login',
-  props<{ username?: string; password?: string,loggedIn: boolean }>()
+  props<{ username?: string; password?: string, loggedIn: boolean }>()
 );
 
 export const logOut = createAction(

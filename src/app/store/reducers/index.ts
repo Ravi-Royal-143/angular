@@ -3,10 +3,10 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
-import * as fromLogInReducer from './log-in.reducer'
+import * as fromLogInReducer from './log-in.reducer';
 
 export interface State {
-  [fromLogInReducer.logInFeatureKey]: fromLogInReducer.UserDetails
+  [fromLogInReducer.logInFeatureKey]: fromLogInReducer.UserDetails;
 }
 
 export const reducers: ActionReducerMap<State> = {

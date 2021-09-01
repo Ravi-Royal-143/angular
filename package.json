@@ -11,8 +11,8 @@
     "lint:fix": "ng lint --fix",
     "e2e": "ng e2e",
     "deploy": "ng deploy --output-path=dist/example  --base-href  https://ravi-royal-143.github.io/angular/",
-    "deploy:build": "ngh --dir dist/first-app",
-    "http-server": "http-server dist/first-app"
+    "deploy:build": "ngh --dir dist/example",
+    "http-server": "http-server dist/example"
   },
   "private": true,
   "dependencies": {

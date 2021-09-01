@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HttpCookie.InterceptorService } from './http-cookie.interceptor.service';
+import { HttpCookieInterceptorService } from './http-cookie.interceptor.service';
 
-describe('HttpCookie.InterceptorService', () => {
-  let service: HttpCookie.InterceptorService;
+describe('HttpCookieInterceptorService', () => {
+  let service: HttpCookieInterceptorService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HttpCookie.InterceptorService);
+    service = TestBed.inject(HttpCookieInterceptorService);
   });
 
   it('should be created', () => {

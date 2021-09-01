@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FlamesComponent } from '@modules/flames/flames.component';
-import { UserDetailsComponent } from './user-details.component';
 
 const routes: Routes = [
     {

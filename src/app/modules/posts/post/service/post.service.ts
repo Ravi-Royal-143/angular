@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { mynodeEndPoint } from 'src/app/urls/url';
-import { AddPost } from '../model/post.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
-import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
+import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
+import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 import { SignUpService } from './service/sign-up.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { AfterContentChecked, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
+import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
 import { WebsocketRes } from './model/interface';
 import { ChatService } from './service/chat.service';
 

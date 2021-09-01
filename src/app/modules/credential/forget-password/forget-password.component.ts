@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
+import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 import { ResponseMes } from '../log-in/model/log-in.interface';
 import { ForgetPasswordService } from './service/forget-password.service';
 

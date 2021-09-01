@@ -3,8 +3,8 @@ import { LogInService } from '@modules/credential/log-in/service/log-in.service'
 import { Store } from '@ngrx/store';
 import { State } from '@store/reducers';
 import { logInFeatureKey } from '@store/reducers/log-in.reducer';
-import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
-import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
+import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
+import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 import * as loginActions from '@store/actions/log-in.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IsauthenticatedService } from 'src/app/heplers/isauthenticated/isauthenticated.service';

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
+import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 
 @Injectable({
   providedIn: 'root'

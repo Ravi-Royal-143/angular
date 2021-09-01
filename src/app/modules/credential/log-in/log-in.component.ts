@@ -3,8 +3,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
-import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
+import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
+import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 import { State } from 'src/app/store/reducers';
 import { LogInService } from './service/log-in.service';
 import * as loginActions from '@store/actions/log-in.action';

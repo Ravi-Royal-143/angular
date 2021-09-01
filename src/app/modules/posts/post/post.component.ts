@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
-import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
+import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
+import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 import { mimeType } from './mime-type.validator';
 import { PostModel } from './model/post.model';
 import { PostService } from './service/post.service';

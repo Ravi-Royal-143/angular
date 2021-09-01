@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
-import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
-import { ToastMessageService } from 'src/app/shared/toast-message/toast-message.service';
+import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
+import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 import { fetchedPosts, PaginationReq, PostsRes } from './model/posts.interface';
 import { PostsModel } from './model/posts.model';
 import { PostsService } from './service/posts.service';

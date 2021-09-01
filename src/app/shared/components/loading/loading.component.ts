@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutoUnsubscribeComponent } from '../auto-unsubscribe/auto-unsubscribe.component';
 import { LoadingService } from './loading.service';
 
 @Component({
@@ -6,15 +7,18 @@ import { LoadingService } from './loading.service';
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })
-export class LoadingComponent implements OnInit {
+export class LoadingComponent extends AutoUnsubscribeComponent implements OnInit {
 
   isLoading: boolean;
-  constructor(private loadingService: LoadingService) { }
+  constructor(private loadingService: LoadingService) {
+    super();
+   }
 
   ngOnInit(): void {
-    this.loadingService.isLoading.subscribe(loader => {
+    const sub$ = this.loadingService.isLoading.subscribe(loader => {
       this.isLoading = loader;
     });
+    this.addsub(sub$);
   }
 
 }

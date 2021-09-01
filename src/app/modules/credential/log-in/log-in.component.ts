@@ -108,10 +108,11 @@ export class LogInComponent extends AutoUnsubscribeComponent {
     if (this.forgotGmail.invalid) {
       return;
     }
-    this.logInService.resetPass(this.forgotGmail.value).subscribe((res: ResponseMes) => {
+    const sub$ = this.logInService.resetPass(this.forgotGmail.value).subscribe((res: ResponseMes) => {
       this.toastMessageService.showSuccessToast([res.message]);
       this.closeForgotPass();
     });
+    this.addsub(sub$);
   }
 
   checkonResetPass() {

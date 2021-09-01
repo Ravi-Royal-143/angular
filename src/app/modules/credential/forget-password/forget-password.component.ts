@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
 import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 import { ResponseMes } from '../log-in/model/log-in.interface';
 import { ForgetPasswordService } from './service/forget-password.service';
@@ -10,7 +11,7 @@ import { ForgetPasswordService } from './service/forget-password.service';
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss']
 })
-export class ForgetPasswordComponent implements OnInit {
+export class ForgetPasswordComponent extends AutoUnsubscribeComponent implements OnInit {
 
   gmail: string;
   token: string;
@@ -41,13 +42,16 @@ export class ForgetPasswordComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private forgetPasswordService: ForgetPasswordService
-  ) { }
+  ) { 
+    super();
+  }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
+    const sub$ = this.route.params.subscribe((params: Params) => {
       this.gmail = params.gmail;
       this.token = params.token;
     });
+    this.addsub(sub$);
   }
 
   onBlurFields(validateField): void {
@@ -63,10 +67,11 @@ export class ForgetPasswordComponent implements OnInit {
       return;
     }
 
-    this.forgetPasswordService.resetPass(this.gmail, this.token, this.passwordFormDetails.value).subscribe((res: ResponseMes) => {
+    const sub$ = this.forgetPasswordService.resetPass(this.gmail, this.token, this.passwordFormDetails.value).subscribe((res: ResponseMes) => {
       this.toastMessageService.showSuccessToast([res.message]);
       this.router.navigate(['../../../', 'log-in'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
     });
+    this.addsub(sub$);
   }
 
   checkOnSubmit() {

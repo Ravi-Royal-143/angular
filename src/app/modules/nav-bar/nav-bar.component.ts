@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LogInService } from '@modules/credential/log-in/service/log-in.service';
 import { Store } from '@ngrx/store';
 import { State } from '@store/reducers';
 import { logInFeatureKey } from '@store/reducers/log-in.reducer';

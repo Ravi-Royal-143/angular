@@ -14,10 +14,12 @@ export class NewsComponent extends AutoUnsubscribeComponent implements OnInit {
   countryList: KeyVal[];
   defaultNewsCountry = 'us';
   selectedCountry;
+  displayNews: boolean;
+  sinlgeNewsUrl = '';
 
   constructor(private newsService: NewsService) {
     super();
-   }
+  }
 
   ngOnInit(): void {
     const sub$ = this.newsService.getCountryDetails().subscribe((res: CountryDetails[]) => {
@@ -33,14 +35,29 @@ export class NewsComponent extends AutoUnsubscribeComponent implements OnInit {
     this.addsub(sub$);
   }
 
-  onChangeCountry(data) {
+  onChangeCountry(data): void {
     this.getNews(data.value.value);
   }
 
-  getNews(newsCountry: string = 'us') {
+  getNews(newsCountry: string = 'us'): void {
     const sub$ = this.newsService.getNews(newsCountry).subscribe((res: NewsApiRes) => {
       this.newses = res.articles;
     });
     this.addsub(sub$);
   }
+
+  openNews(product: Article): void {
+    this.sinlgeNewsUrl = product.url;
+    this.displayNews = true;
+  }
+
+  onCloseNews() {
+    this.sinlgeNewsUrl = '';
+    this.displayNews = false;
+  }
+
+  goToLink(url: string){
+    window.open(url, "_blank");
+}
+
 }

@@ -15,7 +15,7 @@
             </ng-template>
             <ng-template let-product pTemplate="listItem">
                 <div class="p-col-12">
-                    <div class="product-list-item">
+                    <div class="product-list-item"  (click)="goToLink(product.url)">
                         <img [src]="product.urlToImage" [alt]="product.title" />
                         <div class="product-list-detail">
                             <div class="product-name">{{product.title}}</div>
@@ -29,7 +29,7 @@
             </ng-template>
             <ng-template let-product pTemplate="gridItem">
                 <div class="p-col-12 p-md-4">
-                    <div class="product-grid-item card">
+                    <div class="product-grid-item card" (click)="goToLink(product.url)">
                         <div class="product-grid-item-top">
                             <div>
                                 <i class="pi pi-tag product-category-icon"></i>
@@ -48,3 +48,15 @@
         </p-dataView>
     </div>
 </div>
+
+<!-- <div *ngIf="sinlgeNewsUrl">
+    <p-dialog header="Header" [(visible)]="displayNews" [modal]="true" [style]="{width: '80vw'}" [draggable]="false"
+    [resizable]="false" (onHide)="onCloseNews()">
+        <p class="p-m-0">
+            <iframe width="100%" [src]="sinlgeNewsUrl | safe" style="height:60vh;"></iframe>
+        </p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayNews=false" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+</div> -->

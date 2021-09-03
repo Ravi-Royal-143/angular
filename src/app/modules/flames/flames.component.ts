@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
@@ -11,7 +11,7 @@ import { CrushService } from './service/crush.service';
   templateUrl: './flames.component.html',
   styleUrls: ['./flames.component.scss']
 })
-export class FlamesComponent extends AutoUnsubscribeComponent {
+export class FlamesComponent extends AutoUnsubscribeComponent implements OnDestroy {
 
   flamesModel = new FlamesModel(this.fb);
 
@@ -19,7 +19,7 @@ export class FlamesComponent extends AutoUnsubscribeComponent {
 
   constructor(private fb: FormBuilder, private crushService: CrushService) {
     super();
-   }
+  }
 
   get formDetails(): { [key: string]: AbstractControl } {
     return this.flamesModel.userData.controls;
@@ -141,6 +141,10 @@ export class FlamesComponent extends AutoUnsubscribeComponent {
   removeIntervalFromModel(removableIntervalName: string): void {
     clearInterval(this.flamesModel.intervals.find(data => data.name == removableIntervalName)?.interval);
     this.flamesModel.intervals = this.flamesModel.intervals.filter(data => data.name !== removableIntervalName);
+  }
+
+  ngOnDestroy(): void {
+    this.reset();
   }
 
 }

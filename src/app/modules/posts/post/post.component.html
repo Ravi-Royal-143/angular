@@ -2,8 +2,8 @@
     (onHide)="onClickClose()">
     <p-header> {{ editData ? 'Edit Post' : 'Add Post' }} </p-header>
     <div class="centerOfScreen" [formGroup]="postModel.postform">
-        <div class="p-col-12">
-            <div class="p-col-12">
+        <div class="col-12">
+            <div class="col-12">
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                     <input type="Text" pInputText placeholder="Title" formControlName="title"
@@ -15,7 +15,7 @@
                     *ngIf="postModel.istitleValidate && titleFormDetails.value && titleFormDetails.invalid">
                     Enter atleast 3 characters</span>
             </div>
-            <div class="p-col-12 p-text-left">
+            <div class="col-12 p-text-left">
                 <label cass="p-text-left p-ai-start">Summary</label>
                 <span class="p-float-label">
                     <textarea rows="3" class="w-100" pInputTextarea formControlName="content"
@@ -24,7 +24,7 @@
             </div>
             <span class="royal-color-red" *ngIf="postModel.isContentValidate && !contentFormDetails.value">
                 Please Enter Content</span>
-            <div class="p-col-12">
+            <div class="col-12">
 
                 <div *ngIf="imgValueType; then editImgBlock else addImgBlock">
                 </div>
@@ -53,7 +53,7 @@
 </ng-template>
 
 <ng-template #imageAddedBlock>
-    <div class="p-col-12">
+    <div class="col-12">
         <button pButton pRipple type="button" label="Remove Image" icon="pi pi-times" iconPos="right"
             class="p-button-rounded p-button-danger" (click)="removeImg()"></button>
         <div class="image-preview p-mt-1">
@@ -63,7 +63,7 @@
 </ng-template>
 
 <ng-template #addImgBtnBlock>
-    <div class="p-col-12">
+    <div class="col-12">
         <button pButton pRipple label="Pick Image" type="button" icon="pi pi-upload" iconPos="right"
             (click)="filePicker.click()">
         </button>

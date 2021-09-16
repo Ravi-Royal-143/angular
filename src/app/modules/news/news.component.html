@@ -14,7 +14,7 @@
                 </div>
             </ng-template>
             <ng-template let-product pTemplate="listItem">
-                <div class="p-col-12">
+                <div class="col-12">
                     <div class="product-list-item"  (click)="goToLink(product.url)">
                         <img [src]="product.urlToImage" [alt]="product.title" />
                         <div class="product-list-detail">
@@ -28,7 +28,7 @@
                 </div>
             </ng-template>
             <ng-template let-product pTemplate="gridItem">
-                <div class="p-col-12 md:col-4">
+                <div class="col-12 md:col-4">
                     <div class="product-grid-item card" (click)="goToLink(product.url)">
                         <div class="product-grid-item-top">
                             <div>

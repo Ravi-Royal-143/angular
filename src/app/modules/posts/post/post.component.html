@@ -15,8 +15,8 @@
                     *ngIf="postModel.istitleValidate && titleFormDetails.value && titleFormDetails.invalid">
                     Enter atleast 3 characters</span>
             </div>
-            <div class="col-12 p-text-left">
-                <label cass="p-text-left align-items-start">Summary</label>
+            <div class="col-12 text-left">
+                <label class="text-left align-items-start">Summary</label>
                 <span class="p-float-label">
                     <textarea rows="3" class="w-100" pInputTextarea formControlName="content"
                         (blur)="onBlurFields('isContentValidate')"></textarea>
@@ -39,7 +39,7 @@
 </p-dialog>
 
 <ng-template #editImgBlock>
-    <div class="p-text-left">
+    <div class="text-left">
         <span class="pi pi-paperclip text-danger pr-1"></span>
         {{postModel.postform.value.image}}
         <span class="pi pi-times text-danger pl-2" (click)="removeAttachment()"> </span>

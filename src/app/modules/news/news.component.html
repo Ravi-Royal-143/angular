@@ -5,9 +5,9 @@
             <ng-template pTemplate="header">
                 <div class="flex flex-column md:flex-row md:justify-content-center">
                     <p-dropdown [(ngModel)]="selectedCountry" (onChange)="onChangeCountry($event)"
-                        [options]="countryList" placeholder="Select Country" styleClass="p-mb-2 p-mb-md-0"
+                        [options]="countryList" placeholder="Select Country" styleClass="mb-2 md:mb-0"
                         optionLabel="key"></p-dropdown>
-                    <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                    <span class="p-input-icon-left mb-2 md:mb-0">
                         NEWS
                     </span>
                     <p-dataViewLayoutOptions></p-dataViewLayoutOptions>

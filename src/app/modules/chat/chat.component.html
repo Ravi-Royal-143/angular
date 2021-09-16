@@ -19,13 +19,13 @@
 
             <div class="p-grid">
 
-                <div class="col p-pr-0">
+                <div class="col pr-0">
                     <div class="box">
                         <input class="w-100" #textRef #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
                     </div>
                 </div>
 
-                <div class="col-fixed p-pl-0" style="width:80px">
+                <div class="col-fixed pl-0" style="width:80px">
                     <div class="box">
                         <p-button icon="pi pi-send" styleClass="icon-button" [disabled]="!chatref.value"
                             (onClick)="onSend()">
@@ -42,7 +42,7 @@
 </div>
 
 <ng-template #pplBlock let-chat="chat">
-    <div class="p-text-center p-py-1">
+    <div class="p-text-center py-1">
         {{chat.content}}
     </div>
 </ng-template>

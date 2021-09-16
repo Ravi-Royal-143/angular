@@ -3,7 +3,7 @@
     <div class="card">
         <p-dataView #dv [value]="newses" [paginator]="true" [rows]="9" filterBy="name" layout="grid">
             <ng-template pTemplate="header">
-                <div class="flex flex-column md:flex-row md:justify-content-center">
+                <div class="flex flex-column md:flex-row md:justify-content-between">
                     <p-dropdown [(ngModel)]="selectedCountry" (onChange)="onChangeCountry($event)"
                         [options]="countryList" placeholder="Select Country" styleClass="mb-2 md:mb-0"
                         optionLabel="key"></p-dropdown>
@@ -28,7 +28,7 @@
                 </div>
             </ng-template>
             <ng-template let-product pTemplate="gridItem">
-                <div class="col-12 md:col-4">
+                <div class="col-12 md:col-4 md:p-4">
                     <div class="product-grid-item card" (click)="goToLink(product.url)">
                         <div class="product-grid-item-top">
                             <div>

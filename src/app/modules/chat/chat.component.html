@@ -1,4 +1,4 @@
-<div class="p-p-4">
+<div class="p-4">
 
     <div class="p-card">
 
@@ -17,15 +17,15 @@
 
             </div>
 
-            <div class="p-grid">
+            <div class="grid">
 
-                <div class="p-col p-pr-0">
+                <div class="col pr-0">
                     <div class="box">
                         <input class="w-100" #textRef #chatref="ngModel" type="text" pInputText [(ngModel)]="chat" />
                     </div>
                 </div>
 
-                <div class="p-col-fixed p-pl-0" style="width:80px">
+                <div class="col-fixed pl-0" style="width:80px">
                     <div class="box">
                         <p-button icon="pi pi-send" styleClass="icon-button" [disabled]="!chatref.value"
                             (onClick)="onSend()">
@@ -42,7 +42,7 @@
 </div>
 
 <ng-template #pplBlock let-chat="chat">
-    <div class="p-text-center p-py-1">
+    <div class="text-center py-1">
         {{chat.content}}
     </div>
 </ng-template>
@@ -53,9 +53,9 @@
 </ng-template>
 
 <ng-template #thenBlock let-chat="chat">
-    <div class="p-col-12">
-        <div class="p-fluid p-grid p-mr-5">
-            <div class="p-col-12 chat-border">
+    <div class="col-12">
+        <div class="p-fluid grid mr-5">
+            <div class="col-12 chat-border">
                 <span class="royal-ft-wt-700">{{chat.sender}}: </span>
                 {{chat.content}}
             </div>
@@ -64,9 +64,9 @@
 </ng-template>
 
 <ng-template #elseBlock let-chat="chat">
-    <div class="p-col-12">
-        <div class="p-fluid p-grid  p-ml-5">
-            <div class="p-col-12 chat-border  p-text-right">
+    <div class="col-12">
+        <div class="p-fluid grid  ml-5">
+            <div class="col-12 chat-border text-right">
                 <span class="royal-ft-wt-700">YOU: </span>
                 {{chat.content}}
             </div>

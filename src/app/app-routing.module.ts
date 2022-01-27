@@ -33,6 +33,10 @@ const routes: Routes = [
     loadChildren: () => import('@modules/news/news.module').then(m => m.NewsModule)
   },
   {
+    path: 'maps',
+    loadChildren: () => import('@modules/maps/maps.module').then(m => m.MapsModule)
+  },
+  {
     path: '',
     redirectTo: 'user-details',
     pathMatch: 'full'

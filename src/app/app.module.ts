@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingModule } from 'src/app/shared/components/loading/loading.module';
 import { LoaderInterceptor } from './heplers/interceptors';
 import { EmptyRouteComponent } from './empty-route/empty-route/empty-route.component';
@@ -12,7 +14,6 @@ import { HttpCookieInterceptorService } from './heplers/interceptors/http-cookie
 import { ErrorInterceptorService } from './heplers/interceptors/error-interceptor.service';
 import { ToastMessageModule } from './shared/components/toast-message/toast-message.module';
 import { NavBarModule } from '@modules/nav-bar/nav-bar.module';
-import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store/reducers';
 
 @NgModule({

@@ -23,6 +23,12 @@
       "@assets/*": [
         "src/app/assets/*"
       ],
+      "@interfaces/": [
+        "src/app/interfaces/"
+      ],
+      "@interfaces/*": [
+        "src/app/interfaces/*"
+      ],
       "@store/*": [
         "src/app/store/*"
       ]

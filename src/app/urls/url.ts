@@ -10,7 +10,9 @@ const nodeEndPoints = {
     deletePost: 'post/<id>',
     resetPass: 'resetPass/<ResetMail>',
     resetPassEnd: 'resetPass/<ResetMail>/<ResetToken>',
-    news: 'news/latest'
+    news: 'news/latest',
+    listOfVideo: 'video/list',
+    videoPlay: 'video/play',
 };
 
 

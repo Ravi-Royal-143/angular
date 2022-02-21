@@ -37,6 +37,10 @@ const routes: Routes = [
     loadChildren: () => import('@modules/maps/maps.module').then(m => m.MapsModule)
   },
   {
+    path: 'video',
+    loadChildren: () => import('@modules/video-player/video-player.module').then(m => m.VideoPlayerModule)
+  },
+  {
     path: '',
     redirectTo: 'user-details',
     pathMatch: 'full'

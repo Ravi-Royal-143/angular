@@ -2,18 +2,21 @@
     ENJOY the videos
 </strong>
 
-<div *ngFor="let video of listOfVideos">
-    {{video.name}}
-    <p-button icon="pi pi-play" (click)="openPlayer(video.id)"></p-button>
-</div>
 
 <p-button icon="pi pi-times-circle" (click)="urlToVideo = ''"></p-button>
 
-<div class="grid col" *ngIf="urlToVideo">
+<div class="grid col" *ngIf="urlToVideo; else showVideos">
     <div class="col-12 md:col-12 lg:col-8">
         <video controls="controls" class="w-full">
             <source [src]="urlToVideo" type='video/mp4'/>
         </video>
     </div>
 </div>
+
+<ng-template #showVideos>
+    <div *ngFor="let video of listOfVideos">
+        {{video.name}}
+        <p-button icon="pi pi-play" (click)="openPlayer(video.id)"></p-button>
+    </div>    
+</ng-template>
 

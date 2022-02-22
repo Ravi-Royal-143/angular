@@ -32,7 +32,6 @@
     "http-server": "^0.12.3",
     "jquery": "^3.6.0",
     "mapbox-gl": "^2.7.0",
-    "ngx-mapbox-gl": "^7.1.2",
     "popper.js": "^1.16.1",
     "primeflex": "^3.0.1",
     "primeicons": "^4.1.0",

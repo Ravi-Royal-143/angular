@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {OverlayPanelModule} from 'primeng/overlaypanel';
-import {ButtonModule} from 'primeng/button';
-import { NgxMapboxGLModule } from "ngx-mapbox-gl";
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { MapsComponent } from './maps.component';
 import { MapsRoutingModule } from './maps.routing.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,11 @@ import { MapsRoutingModule } from './maps.routing.module';
   imports: [
     CommonModule,
     MapsRoutingModule,
+    FormsModule,
     OverlayPanelModule,
-    ButtonModule,
-    NgxMapboxGLModule.withConfig({
-      accessToken:
-        "pk.eyJ1IjoicmF2aWt1bWFyLTE0MyIsImEiOiJja3dzdHY5aGYxOXc5Mnh1c3BtZ3hhZ2tyIn0.aGmy8sC0KGViEY9frFbjmA"
-    })
+    InputTextModule,
+    AutoCompleteModule,
+    ButtonModule
   ]
 })
 export class MapsModule { }

@@ -9,7 +9,11 @@ mgl-map {
 }
 
 .map-config {
-    right: 10px;
-    bottom: 10px;
+    left: 10px;
+    top: 10px;
     z-index: 5;
+}
+
+.splitter {
+    border-bottom: 3px dashed grey;;
 }

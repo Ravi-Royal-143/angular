@@ -1,22 +1,29 @@
-<strong class="p-2">
-    ENJOY the videos
-</strong>
+<div class="m-3">
+    <strong class="p-2">
+        ENJOY the videos
+    </strong>
+    <span *ngIf="urlToVideo">
+        click here to close the video ->
+        <p-button icon="pi pi-times-circle" (click)="urlToVideo = ''"></p-button>
+    </span>
 
-
-<p-button icon="pi pi-times-circle" (click)="urlToVideo = ''"></p-button>
-
-<div class="grid col" *ngIf="urlToVideo; else showVideos">
-    <div class="col-12 md:col-12 lg:col-8">
-        <video controls="controls" class="w-full">
-            <source [src]="urlToVideo" type='video/mp4'/>
-        </video>
+    <div class="grid col" *ngIf="urlToVideo; else showVideos">
+        <div class="col-12 md:col-12 lg:col-8">
+            <video controls="controls" class="w-full">
+                <source [src]="urlToVideo" type='video/mp4' />
+            </video>
+        </div>
     </div>
+
+    <ng-template #showVideos>
+        <div *ngFor="let video of listOfVideos" class="flex">
+            <div>
+                <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"
+                    (click)="openPlayer(video.id)"></button>
+            </div>
+            <div class="flex align-items-center justify-content-center">
+                -> {{video.name}}
+            </div>
+        </div>
+    </ng-template>
 </div>
-
-<ng-template #showVideos>
-    <div *ngFor="let video of listOfVideos">
-        {{video.name}}
-        <p-button icon="pi pi-play" (click)="openPlayer(video.id)"></p-button>
-    </div>    
-</ng-template>
-

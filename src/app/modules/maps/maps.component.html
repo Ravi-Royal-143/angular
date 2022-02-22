@@ -1,3 +1,14 @@
-mpas loaded
+<div class="m-3">
+    <div class="map relative" id="map" class="match-parent" [style]="'mapbox://styles/mapbox/streets-v9'">
+        <button class="absolute map-config" type="text" pButton label="Map Configuration" (click)="op.toggle($event)"></button>
+    </div>
 
-<mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[9]" [center]="[-74.50, 40]"></mgl-map>
+    <div id="geocoder" (click)="changeLocation()"> test</div>
+
+    <p-overlayPanel #op>
+        <ng-template pTemplate>
+            Content
+        </ng-template>
+    </p-overlayPanel>
+
+</div>

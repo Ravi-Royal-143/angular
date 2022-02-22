@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
+import { Paginator } from 'primeng/paginator';
 import { AutoUnsubscribeComponent } from 'src/app/shared/components/auto-unsubscribe/auto-unsubscribe.component';
 import { ToastMessageService } from 'src/app/shared/components/toast-message/toast-message.service';
 import { fetchedPosts, PaginationReq, PostsRes } from './model/posts.interface';
@@ -12,6 +13,8 @@ import { PostsService } from './service/posts.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
+
+  @ViewChild('paginator', { static: false }) paginator: Paginator;
 
   img = 'https://drive.google.com/uc?export=view&id=<GoogleImgId>';
   postsModel = new PostsModel();
@@ -52,6 +55,7 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
       const index = this.postsModel.posts.findIndex(post => post._id === updatedPost.post._id);
       if (index === -1) {
         this.postsModel.reqPage = 1;
+        this.paginator.changePageToFirst(updatedPost);
         // this.postsModel.posts.push(this.postConversion(updatedPost.post));
         this.getPosts();
       } else {
@@ -79,7 +83,7 @@ export class PostsComponent extends AutoUnsubscribeComponent implements OnInit {
   onDeletePost(post) {
     const sub$ = this.postsService.deletePost(post).subscribe((data: any) => {
       this.toastMessageService.showSuccessToast([data.message]);
-      this.postsModel.posts = this.postsModel.posts.filter(data => data._id !== post._id);
+      this.getPosts();
     });
     this.addsub(sub$);
   }

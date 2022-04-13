@@ -8,7 +8,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { MapsComponent } from './maps.component';
 import { MapsRoutingModule } from './maps.routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     OverlayPanelModule,
     InputTextModule,
     AutoCompleteModule,
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class MapsModule { }

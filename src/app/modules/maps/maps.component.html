@@ -1,19 +1,25 @@
 <div class="m-3">
+    <button class="absolute map-config" type="text" pButton label="Map Configuration"
+        (click)="op.toggle($event)"></button>
     <div class="map relative" id="map" class="match-parent" [style]="'mapbox://styles/mapbox/streets-v9'">
-        <button class="absolute map-config" type="text" pButton label="Map Configuration"
-            (click)="op.toggle($event)"></button>
     </div>
 
     <p-overlayPanel #op (onHide)="onHidePanel()">
         <ng-template pTemplate>
             <div *ngIf="showMainContent; else subContentsTemplate">
-                <div class="flex">
+                <div class="flex flex-column">
                     <div class="splitter p-2 flex justify-content-center align-items-center"
                         (click)="selectedContent('searchLocation')">
                         <span class="pi pi-search pr-2"></span>
                         <span>search Location </span>
                         <span class="pi pi-angle-right pl-2"></span>
                     </div>
+                    <!-- <div class="splitter p-2 flex justify-content-center align-items-center"
+                        (click)="selectedContent('direction')">
+                        <span class="pi pi-search pr-2"></span>
+                        <span>Get Direction </span>
+                        <span class="pi pi-angle-right pl-2"></span>
+                    </div> -->
                 </div>
             </div>
             <ng-template #subContentsTemplate>
@@ -27,8 +33,43 @@
                                     [suggestions]="searchSuggestions" field="name" (completeMethod)="search($event)"
                                     [forceSelection]="true"></p-autoComplete>
                                 <div class="p-2">
-                                    <p-button label="Go To Locataion" icon="pi pi-search" iconPos="right"
-                                        (onClick)="changeLocation(selectedLoc)" [disabled]="!selectedLoc"></p-button>
+                                    <button pButton pRipple type="button" label="Go To Locataion"
+                                        icon="pi pi-angle-right" iconPos="right"
+                                        class="p-button-outlined p-button-rounded p-button-success"
+                                        (click)="changeLocation(selectedLoc)" [disabled]="!selectedLoc"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'direction'">
+                        <div class="grid p-fluid">
+                            <div class="col-12" [formGroup]="directions">
+                                <div formArrayName="direction">
+                                    <strong>Enter search location</strong>
+                                    <div *ngFor="let item of directions.controls.direction.controls; let i = index"
+                                        class="py-1">
+                                        <div>
+                                            <p-autoComplete placeholder="Enter search location" [formControlName]="i"
+                                                [suggestions]="searchSuggestions" field="name"
+                                                (completeMethod)="search($event)" [forceSelection]="true"
+                                                class="inline-block"></p-autoComplete>
+                                            <button *ngIf="getControls().length > 2" pButton pRipple type="button"
+                                                icon="pi pi-minus-circle" class="p-button-rounded p-button-text"
+                                                (click)="removeSkill(i)"></button>
+                                        </div>
+                                    </div>
+                                    <div class="p-2">
+                                        <button pButton pRipple type="button" label="Add next Location"
+                                            icon="pi pi-angle-right" iconPos="right"
+                                            class="p-button-outlined p-button-rounded p-button-success"
+                                            (click)="addSkills()"></button>
+                                    </div>
+                                    <div class="p-2">
+                                        <button pButton pRipple type="button" label="Get Direction"
+                                            icon="pi pi-angle-right" iconPos="right"
+                                            class="p-button-outlined p-button-rounded p-button-success"
+                                            (click)="getDirections()"></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -38,5 +79,4 @@
             </ng-template>
         </ng-template>
     </p-overlayPanel>
-
 </div>
